@@ -67,6 +67,10 @@ public class SudokuBoardTest {
         HashSet<Integer> test2 = new HashSet<Integer>(Arrays.asList(test));
         assertEquals(test.length, test2.size());
     }
-
+    
+    @Test
+    public void testPrint() {
+    	sudokuBoard1.print();
+    }
 
 }
