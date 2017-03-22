@@ -2,7 +2,7 @@ package sudokupack;
 
 public class SudokuColumn extends SudokuItem {
 
-	public SudokuColumn(final SudokuField[] values) {
-		super(values);
-	}
+    public SudokuColumn(final SudokuField[] values) {
+        super(values);
+    }
 }

@@ -1,5 +1,6 @@
 package sudokuPackTest;
 
+import org.junit.Assert;
 import sudokupack.BackTrackingSudokuSolver;
 import sudokupack.SudokuBoard;
 import sudokupack.SudokuSolver;
@@ -33,44 +34,53 @@ public class SudokuBoardTest {
     }
 
     @Test
-    public void testRow() {
-        Integer[] test = new Integer[9];
-        int col = (int) (Math.random() * 9);
+    public void testValuesUniquenessInRow() {
         for (int i = 0; i < 9; i++) {
-            test[i] = sudokuBoard1.getValue(i, col);
+            Assert.assertTrue(sudokuBoard1.getRow(i).verify());
         }
-        HashSet<Integer> test2 = new HashSet<Integer>(Arrays.asList(test));
-        assertEquals(test.length, test2.size());
     }
 
     @Test
-    public void testCol() {
-        Integer[] test = new Integer[9];
-        int row = (int) (Math.random() * 9);
+    public void testValuesUniquenessInCol() {
         for (int i = 0; i < 9; i++) {
-            test[i] = sudokuBoard1.getValue(row, i);
+            Assert.assertTrue(sudokuBoard1.getColumn(i).verify());
         }
-        HashSet<Integer> test2 = new HashSet<Integer>(Arrays.asList(test));
-        assertEquals(test.length, test2.size());
     }
 
     @Test
-    public void testBox() {
-        Integer[] test = new Integer[9];
-        int row = (int) (Math.random() * 3);
-        int col = (int) (Math.random() * 3);
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                test[j + i * 3] = sudokuBoard1.getValue(i + row * 3, j + col * 3);
-            }
+    public void testValuesUniquenessInBox() {
+        for (int i = 0; i < 9; i++) {
+            Assert.assertTrue(sudokuBoard1.getBox(i, i).verify());
         }
-        HashSet<Integer> test2 = new HashSet<Integer>(Arrays.asList(test));
-        assertEquals(test.length, test2.size());
-    }
-    
-    @Test
-    public void testPrint() {
-    	sudokuBoard1.print();
     }
 
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void getRowWithWrongParameterExpectedException() {
+        sudokuBoard1.getRow(-1);
+        Assert.fail();
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void getColumnWithWrongParameterExpectedException() {
+        sudokuBoard1.getColumn(9);
+        Assert.fail();
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void getBoxWithWrongParametersExpectedException() {
+        sudokuBoard1.getBox(-1, 12);
+        Assert.fail();
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void getValueWithWrongParametersExpectedException() {
+        sudokuBoard1.getValue(9, 10);
+        Assert.fail();
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void setValueWithWrongParametersExpectedException() {
+        sudokuBoard1.setValue(-1, -3, 5);
+        Assert.fail();
+    }
 }

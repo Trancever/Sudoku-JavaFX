@@ -5,7 +5,7 @@ public class SudokuBoard {
     private SudokuField[][] field;
 
     public SudokuBoard() {
-    	field = new SudokuField[9][9];
+        field = new SudokuField[9][9];
         initBoard();
     }
 
@@ -32,11 +32,19 @@ public class SudokuBoard {
     }
     
     public Integer getValue(final int row, final int col) {
+        if (col < 0 || col > 8 || row <  0 || row > 8) {
+            throw new IndexOutOfBoundsException("Wrong parameters of getValue. Given row = " + row
+                    + " expected from 0 to 8. " + "Given column = " + col + " expected from 0 to 8.");
+        }
         Integer value = field[row][col].getValue();
         return value;
     }
     
-    public void setValue(final int row, final int col, final int value) {
+    public void setValue(final int row, final int col, final int value) throws IndexOutOfBoundsException {
+        if (col < 0 || col > 8 || row <  0 || row > 8) {
+            throw new IndexOutOfBoundsException("Wrong parameters of setValue. Given row = " + row
+                    + " expected from 0 to 8. " + "Given column = " + col + " expected from 0 to 8.");
+        }
         this.field[row][col].setValue(value);
     }
 
@@ -45,47 +53,38 @@ public class SudokuBoard {
     }
     
     public SudokuRow getRow(final int row) throws IndexOutOfBoundsException {
-    	if (row < 1 || row > 9) {
-    		throw new IndexOutOfBoundsException("Wrong row. Given = " + row + " expected from 1 to 9.");
-    	}
-    	return new SudokuRow(field[row]);
+        if (row < 0 || row > 8) {
+            throw new IndexOutOfBoundsException("Wrong row. Given = " + row + " expected from 0 to 8.");
+        }
+        return new SudokuRow(field[row]);
     }
     
     public SudokuColumn getColumn(final int column) throws IndexOutOfBoundsException {
-    	if (column < 1 || column > 9) {
-    		throw new IndexOutOfBoundsException("Wrong column. Given = " + column + " expected from 1 to 9.");
-    	}
-    	SudokuField[] tmp = new SudokuField[9];
-    	for (int i = 0; i < 9; i++) {
-    		tmp[i] = field[i][column];
-    	}
-    	return new SudokuColumn(tmp);
+        if (column < 0 || column > 8) {
+            throw new IndexOutOfBoundsException("Wrong column. Given = " + column + " expected from 0 to 8.");
+        }
+        SudokuField[] tmp = new SudokuField[9];
+        for (int i = 0; i < 9; i++) {
+            tmp[i] = field[i][column];
+        }
+        return new SudokuColumn(tmp);
     }
     
     public SudokuBox getBox(final int row, final int column) throws IndexOutOfBoundsException {
-    	if (column < 1 || column > 9 || row < 1 || row > 9) {
-    		throw new IndexOutOfBoundsException("Wrong Box. Given row = " + row + " expected from 1 to 9. "
-    				+ "Given column = " + column + " expected from 1 to 9.");
-    	}
-    	int divX = (row - 1) / 3;
-    	int divY = (column - 1) / 3;
-    	SudokuField[] tmp = new SudokuField[9];
-    	int counter = 0;
-    	for (int i = 0; i < 3; i++) {
-    		for (int j = 0; j < 3; j++) {
-    			tmp[counter] = field[i + divX * 3][j + divY * 3];
-    			counter++;
-    		}
-    	}
-    	return new SudokuBox(tmp);
-    }
-    
-    public void print() {
-    	for (SudokuField[] value : field) {
-    		for (SudokuField v : value) {
-    			System.out.print(v.getValue() + " ");
-    		}
-    		System.out.println("");
-    	}
+        if (column < 0 || column > 8 || row <  0 || row > 8) {
+            throw new IndexOutOfBoundsException("Wrong Box. Given row = " + row + " expected from 0 to 8. "
+                    + "Given column = " + column + " expected from 0 to 8.");
+        }
+        int divX = row / 3;
+        int divY = column / 3;
+        SudokuField[] tmp = new SudokuField[9];
+        int counter = 0;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                tmp[counter] = field[i + divX * 3][j + divY * 3];
+                counter++;
+            }
+        }
+        return new SudokuBox(tmp);
     }
  }

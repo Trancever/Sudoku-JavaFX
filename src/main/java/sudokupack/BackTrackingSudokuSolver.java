@@ -15,13 +15,14 @@ public class BackTrackingSudokuSolver implements SudokuSolver {
         }
 
         for (int num = 1; num <= 9; num++) {
-            if (isSafe(row, col, num, sudokuBoard)) {
-                sudokuBoard.setValue(row,  col, num);
+            sudokuBoard.setValue(row, col, num);
+            if (isSafe(row, col, sudokuBoard)) {
                 if (solve(sudokuBoard)) {
                     return true;
                 }
                 sudokuBoard.setValue(row,  col, 0);
             }
+            sudokuBoard.setValue(row,  col, 0);
         }
         return false;
     }
@@ -45,37 +46,8 @@ public class BackTrackingSudokuSolver implements SudokuSolver {
         return tmp;
     }
 
-    private boolean usedInRow(final int row, final int num, final SudokuBoard sudokuBoard) {
-        for (int col = 0; col < 9; col++) {
-            if (sudokuBoard.getValue(row,  col) == num) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean usedInCol(final int col, final int num, final SudokuBoard sudokuBoard) {
-        for (int row = 0; row < 9; row++) {
-            if (sudokuBoard.getValue(row, col) == num) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean usedInBox(final int boxStartRow, final int boxStartCol, final int num, final SudokuBoard sudokuBoard) {
-        for (int row = 0; row < 3; row++) {
-            for (int col = 0; col < 3; col++) {
-                if (sudokuBoard.getValue(row + boxStartRow, col + boxStartCol) == num) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    private boolean isSafe(final int row, final int col, final int num, final SudokuBoard sudokuBoard) {
-        return !usedInRow(row, num, sudokuBoard) && !usedInCol(col, num, sudokuBoard) && !usedInBox(row - row % 3, col - col % 3, num, sudokuBoard);
+    private boolean isSafe(final int row, final int col, final SudokuBoard sudokuBoard) {
+        return sudokuBoard.getRow(row).verify() && sudokuBoard.getColumn(col).verify() && sudokuBoard.getBox(row, col).verify();
     }
     
 }
