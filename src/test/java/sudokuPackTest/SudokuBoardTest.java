@@ -30,7 +30,7 @@ public class SudokuBoardTest {
 
     @Test
     public void testRepeat() {
-        assertFalse(Arrays.equals(sudokuBoard1.getAll(), sudokuBoard2.getAll()));
+        assertFalse(sudokuBoard1.getAll().equals(sudokuBoard2.getAll()));
     }
 
     @Test
@@ -82,5 +82,13 @@ public class SudokuBoardTest {
     public void setValueWithWrongParametersExpectedException() {
         sudokuBoard1.setValue(-1, -3, 5);
         Assert.fail();
+    }
+    
+    @Test
+    public void printTest() {
+    	System.out.println("Pierwsza");
+    	sudokuBoard1.print();
+    	System.out.println("Druga");
+    	sudokuBoard2.print();
     }
 }

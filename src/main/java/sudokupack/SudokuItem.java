@@ -1,20 +1,21 @@
 package sudokupack;
 
 import java.util.HashSet;
+import java.util.List;
 
 public class SudokuItem {
 
-    private SudokuField[] values;
+    private List<SudokuField> values;
 
-    public SudokuItem(final SudokuField[] values) {
+    public SudokuItem(final List<SudokuField> values) {
         this.values = values;
     }
 
     public boolean verify() {
         HashSet<Integer> set = new HashSet<Integer>();
-        for (int i = 0; i < values.length; i++) {
-            if (values[i].getValue() != 0) {
-                if (!set.add(values[i].getValue())) {
+        for (SudokuField field : values) {
+            if (field.getValue() != 0) {
+                if (!set.add(field.getValue())) {
                     return false;
                 }
             }

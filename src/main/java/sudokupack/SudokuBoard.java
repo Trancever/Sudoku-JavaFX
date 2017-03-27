@@ -1,33 +1,33 @@
 package sudokupack;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class SudokuBoard {
 
-    private SudokuField[][] field;
+    private ArrayList<ArrayList<SudokuField>> field;
 
     public SudokuBoard() {
-        field = new SudokuField[9][9];
+		field = new ArrayList<ArrayList<SudokuField>>(
+				Collections.nCopies(9, new ArrayList<SudokuField>(Collections.nCopies(9, new SudokuField(0)))));
         initBoard();
     }
 
     private void initBoard() {
         Integer[] tmp = new Integer[3];
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                field[i][j] = new SudokuField();
-            }
-        }
         do {
             tmp[0] = generateNumber(1, 9);
             tmp[1] = generateNumber(1, 9);
             tmp[2] = generateNumber(1, 9);
         } while ((tmp[0] == tmp[1]) || (tmp[1] == tmp[2]) || (tmp[0] == tmp[2]));
         for (int i = 0; i < 3; i++) {
-            field[0][i].setValue(tmp[i]);
+            this.setValue(0, i, tmp[i]);
         }
     }
 
-    public SudokuField[][] getAll() {
-        SudokuField[][] tmp = field;
+    public ArrayList<ArrayList<SudokuField>> getAll() {
+    	ArrayList<ArrayList<SudokuField>> tmp = field;
         return tmp;
     }
     
@@ -36,7 +36,7 @@ public class SudokuBoard {
             throw new IndexOutOfBoundsException("Wrong parameters of getValue. Given row = " + row
                     + " expected from 0 to 8. " + "Given column = " + col + " expected from 0 to 8.");
         }
-        Integer value = field[row][col].getValue();
+        Integer value = field.get(row).get(col).getValue();
         return value;
     }
     
@@ -45,7 +45,7 @@ public class SudokuBoard {
             throw new IndexOutOfBoundsException("Wrong parameters of setValue. Given row = " + row
                     + " expected from 0 to 8. " + "Given column = " + col + " expected from 0 to 8.");
         }
-        this.field[row][col].setValue(value);
+        this.field.get(row).get(col).setValue(value);
     }
 
     private int generateNumber(final int lowest, final int highest) {
@@ -56,16 +56,16 @@ public class SudokuBoard {
         if (row < 0 || row > 8) {
             throw new IndexOutOfBoundsException("Wrong row. Given = " + row + " expected from 0 to 8.");
         }
-        return new SudokuRow(field[row]);
+        return new SudokuRow(field.get(row));
     }
     
     public SudokuColumn getColumn(final int column) throws IndexOutOfBoundsException {
         if (column < 0 || column > 8) {
             throw new IndexOutOfBoundsException("Wrong column. Given = " + column + " expected from 0 to 8.");
         }
-        SudokuField[] tmp = new SudokuField[9];
+        List<SudokuField> tmp = new ArrayList<SudokuField>();
         for (int i = 0; i < 9; i++) {
-            tmp[i] = field[i][column];
+            tmp.add(field.get(i).get(column));
         }
         return new SudokuColumn(tmp);
     }
@@ -77,14 +77,24 @@ public class SudokuBoard {
         }
         int divX = row / 3;
         int divY = column / 3;
-        SudokuField[] tmp = new SudokuField[9];
+        List<SudokuField> tmp = new ArrayList<SudokuField>();
         int counter = 0;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                tmp[counter] = field[i + divX * 3][j + divY * 3];
+                tmp.add(field.get(i + divX * 3).get(j + divY * 3));
                 counter++;
             }
         }
         return new SudokuBox(tmp);
+    }
+    
+    public void print() {
+    	for (List<SudokuField> fi : field) {
+    		for (SudokuField value : fi) {
+    			System.out.print(value.getValue());
+    			System.out.print(" ");
+    		}
+    		System.out.println();
+    	}
     }
  }

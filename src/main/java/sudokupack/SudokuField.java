@@ -7,6 +7,9 @@ private Integer field;
     public SudokuField() {
         field = new Integer(0);
     }
+    public SudokuField(final int value) {
+    	field = value;
+    }
 
     public int getValue() {
         Integer value = field;
