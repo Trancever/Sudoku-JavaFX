@@ -1,10 +1,10 @@
 package sudokupack;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class SudokuBox extends SudokuItem {
 
-    public SudokuBox(final List<SudokuField> values) {
+    public SudokuBox(final ArrayList<SudokuField> values) {
         super(values);
     }
 }

@@ -16,7 +16,7 @@ private Integer field;
         return value;
     }
 
-    public void setValue(final Integer value) {
-        field = value;
+    public void setValue(final int value) {
+        field = new Integer(value);
     }
 }

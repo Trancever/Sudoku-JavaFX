@@ -32,7 +32,7 @@ public class BackTrackingSudokuSolver implements SudokuSolver {
         int row, col = 0;
         for (row = 0; row < 9; row++) {
             for (col = 0; col < 9; col++) {
-                if (sudokuBoard.getValue(row,  col) == 0) {
+                if (sudokuBoard.getValue(row, col) == 0) {
                     tmp[0] = 1;
                     tmp[1] = row;
                     tmp[2] = col;

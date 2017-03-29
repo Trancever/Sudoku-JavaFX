@@ -1,10 +1,10 @@
 package sudokupack;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class SudokuRow extends SudokuItem {
 
-    public SudokuRow(final List<SudokuField> values) {
+    public SudokuRow(final ArrayList<SudokuField> values) {
         super(values);
     }
 }

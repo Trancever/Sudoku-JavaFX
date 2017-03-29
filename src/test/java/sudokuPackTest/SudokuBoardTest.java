@@ -26,10 +26,17 @@ public class SudokuBoardTest {
         sudokuSolver = new BackTrackingSudokuSolver();
         sudokuSolver.solve(sudokuBoard1);
         sudokuSolver.solve(sudokuBoard2);
+
+        print(sudokuBoard1);
+        print(sudokuBoard2);
     }
 
     @Test
     public void testRepeat() {
+<<<<<<< HEAD
+=======
+        //assertFalse(Arrays.equals(sudokuBoard1.getAll(), sudokuBoard2.getAll()));
+>>>>>>> Change Arrays to ArrayLists in all methods
         assertFalse(sudokuBoard1.getAll().equals(sudokuBoard2.getAll()));
     }
 
@@ -83,6 +90,7 @@ public class SudokuBoardTest {
         sudokuBoard1.setValue(-1, -3, 5);
         Assert.fail();
     }
+<<<<<<< HEAD
     
     @Test
     public void printTest() {
@@ -90,5 +98,15 @@ public class SudokuBoardTest {
     	sudokuBoard1.print();
     	System.out.println("Druga");
     	sudokuBoard2.print();
+=======
+
+    private void print(SudokuBoard sudokuBoard) {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; i < 9; i++) {
+                System.out.print(sudokuBoard.getValue(i, j));
+            }
+            System.out.println();
+        }
+>>>>>>> Change Arrays to ArrayLists in all methods
     }
 }
