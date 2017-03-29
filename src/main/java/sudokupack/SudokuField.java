@@ -12,7 +12,7 @@ private Integer field;
     }
 
     public int getValue() {
-        Integer value = field;
+        int value = field.intValue();
         return value;
     }
 

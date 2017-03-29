@@ -20,8 +20,8 @@ public class SudokuItemTest {
             fields.add(new SudokuField(i));
 =======
         ArrayList<SudokuField> fields = new ArrayList<SudokuField>();
-        for (int i = 1; i <= fields.size(); i++) {
-            fields.set(i - 1, new SudokuField());
+        for (int i = 1; i <= 9; i++) {
+            fields.add(new SudokuField());
             fields.get(i - 1).setValue(i);
 >>>>>>> Change Arrays to ArrayLists in all methods
         }
@@ -37,8 +37,8 @@ public class SudokuItemTest {
             fields.add(new SudokuField(i%2));
 =======
         ArrayList<SudokuField> fields = new ArrayList<SudokuField>();
-        for (int i = 1; i <= fields.size(); i++) {
-            fields.set(i - 1, new SudokuField());
+        for (int i = 1; i <= 9; i++) {
+            fields.add(new SudokuField());
             fields.get(i - 1).setValue(i%2);
 >>>>>>> Change Arrays to ArrayLists in all methods
         }

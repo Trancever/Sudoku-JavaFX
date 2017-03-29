@@ -34,9 +34,12 @@ public class SudokuBoardTest {
     @Test
     public void testRepeat() {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         //assertFalse(Arrays.equals(sudokuBoard1.getAll(), sudokuBoard2.getAll()));
 >>>>>>> Change Arrays to ArrayLists in all methods
+=======
+>>>>>>> Fix some errors
         assertFalse(sudokuBoard1.getAll().equals(sudokuBoard2.getAll()));
     }
 

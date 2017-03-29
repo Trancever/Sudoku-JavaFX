@@ -49,5 +49,4 @@ public class BackTrackingSudokuSolver implements SudokuSolver {
     private boolean isSafe(final int row, final int col, final SudokuBoard sudokuBoard) {
         return sudokuBoard.getRow(row).verify() && sudokuBoard.getColumn(col).verify() && sudokuBoard.getBox(row, col).verify();
     }
-    
 }
