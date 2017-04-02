@@ -33,13 +33,6 @@ public class SudokuBoardTest {
 
     @Test
     public void testRepeat() {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-        //assertFalse(Arrays.equals(sudokuBoard1.getAll(), sudokuBoard2.getAll()));
->>>>>>> Change Arrays to ArrayLists in all methods
-=======
->>>>>>> Fix some errors
         assertFalse(sudokuBoard1.getAll().equals(sudokuBoard2.getAll()));
     }
 
@@ -93,15 +86,6 @@ public class SudokuBoardTest {
         sudokuBoard1.setValue(-1, -3, 5);
         Assert.fail();
     }
-<<<<<<< HEAD
-    
-    @Test
-    public void printTest() {
-    	System.out.println("Pierwsza");
-    	sudokuBoard1.print();
-    	System.out.println("Druga");
-    	sudokuBoard2.print();
-=======
 
     private void print(SudokuBoard sudokuBoard) {
         for (int i = 0; i < 9; i++) {
@@ -110,6 +94,5 @@ public class SudokuBoardTest {
             }
             System.out.println();
         }
->>>>>>> Change Arrays to ArrayLists in all methods
     }
 }
