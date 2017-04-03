@@ -1,5 +1,8 @@
 package sudokupack;
 
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Objects;
+
 public class BackTrackingSudokuSolver implements SudokuSolver {
 
     public boolean solve(final SudokuBoard sudokuBoard) {
@@ -49,4 +52,23 @@ public class BackTrackingSudokuSolver implements SudokuSolver {
     private boolean isSafe(final int row, final int col, final SudokuBoard sudokuBoard) {
         return sudokuBoard.getRow(row).verify() && sudokuBoard.getColumn(col).verify() && sudokuBoard.getBox(row, col).verify();
     }
+    
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this.getClass()).toString();
+    }
+    
+    @Override
+    public boolean equals(final Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        return this == obj;
+    }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(this);
+    }
+    
 }

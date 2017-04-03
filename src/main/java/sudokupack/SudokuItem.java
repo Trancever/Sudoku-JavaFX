@@ -1,12 +1,13 @@
 package sudokupack;
 
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Objects;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 
 public class SudokuItem {
 
-    private ArrayList<SudokuField> values;
+    protected ArrayList<SudokuField> values;
 
     public SudokuItem(final ArrayList<SudokuField> values) {
         this.values = values;
@@ -22,5 +23,41 @@ public class SudokuItem {
             }
         }
         return true;
+    }
+    
+    private ArrayList<SudokuField> getAll() {
+        return this.values;
+    }
+    
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this.getClass()).add("values", values)
+                .toString();
+    }
+    
+    @Override
+    public boolean equals(final Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (this == obj) {
+            return true;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final SudokuItem other = (SudokuItem) obj;
+        final ArrayList<SudokuField> list = other.getAll();
+        for (int i = 0; i < values.size(); i++) {
+            if (values.get(i).getValue() != list.get(i).getValue()) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(this.values);
     }
 }

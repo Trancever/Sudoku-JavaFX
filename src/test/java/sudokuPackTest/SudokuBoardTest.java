@@ -8,9 +8,6 @@ import sudokupack.SudokuSolver;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.HashSet;
-
 import static org.junit.Assert.*;
 
 public class SudokuBoardTest {
@@ -26,9 +23,6 @@ public class SudokuBoardTest {
         sudokuSolver = new BackTrackingSudokuSolver();
         sudokuSolver.solve(sudokuBoard1);
         sudokuSolver.solve(sudokuBoard2);
-
-        print(sudokuBoard1);
-        print(sudokuBoard2);
     }
 
     @Test
@@ -85,14 +79,5 @@ public class SudokuBoardTest {
     public void setValueWithWrongParametersExpectedException() {
         sudokuBoard1.setValue(-1, -3, 5);
         Assert.fail();
-    }
-
-    private void print(SudokuBoard sudokuBoard) {
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; i < 9; i++) {
-                System.out.print(sudokuBoard.getValue(i, j));
-            }
-            System.out.println();
-        }
     }
 }

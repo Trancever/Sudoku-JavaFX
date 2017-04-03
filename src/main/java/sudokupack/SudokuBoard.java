@@ -1,5 +1,7 @@
 package sudokupack;
 
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Objects;
 import java.util.ArrayList;
 
 public class SudokuBoard {
@@ -95,4 +97,39 @@ public class SudokuBoard {
         }
         return new SudokuBox(tmp);
     }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this.getClass())
+                .add("field", field).toString();
+    }
+    
+    @Override
+    public boolean equals(final Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (this == obj) {
+            return true;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final SudokuBoard other = (SudokuBoard) obj;
+        final ArrayList<ArrayList<SudokuField>> list = other.getAll();
+        for (int i = 0; i < field.size(); i++) {
+            for (int j = 0; j < field.get(i).size(); j++) {
+                if (field.get(i).get(j).getValue() != list.get(i).get(j).getValue()) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(this.field);
+    }
+    
 }
