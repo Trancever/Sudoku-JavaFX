@@ -2,9 +2,11 @@ package sudokupack;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import java.util.ArrayList;
+import java.util.*;
+import java.io.Serializable;
 
-public class SudokuBoard {
+
+public class SudokuBoard implements Serializable {
 
     private ArrayList<ArrayList<SudokuField>> field;
 
