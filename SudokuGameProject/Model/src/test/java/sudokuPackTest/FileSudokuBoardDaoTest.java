@@ -8,6 +8,8 @@ import sudokupack.FileSudokuBoardDao;
 import sudokupack.SudokuBoard;
 import sudokupack.SudokuSolver;
 
+import java.io.File;
+
 public class FileSudokuBoardDaoTest {
 
     private static final String FILENAME  = "Resources/testSerializedSudokuBoard.data";
@@ -23,13 +25,14 @@ public class FileSudokuBoardDaoTest {
     public void writeObjectToFile() {
         SudokuBoard board = new SudokuBoard();
         fileSudokuBoardDao.write(board);
-        System.out.println("Done hehe");
+        File file = new File(FILENAME);
+        Assert.assertTrue(file.exists() && !file.isDirectory());
     }
 
     @Test
     public void readObjectFromFile() {
         SudokuBoard board = fileSudokuBoardDao.read();
-        System.out.println("Wczytany");
+        Assert.assertTrue(board != null);
     }
 
     @Test
