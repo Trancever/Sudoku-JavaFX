@@ -1,0 +1,20 @@
+.level-button {
+    -fx-padding: 20px;
+    -fx-border-insets: 20px;
+    -fx-background-insets: 20px;
+    -fx-min-height: 100px;
+    -fx-min-width: 240px;
+    -fx-font-size: 20px;
+}
+
+.start-game-label {
+    -fx-font-size: 22px;
+    -fx-font-weight: 500;
+    -fx-alignment: center;
+    -fx-label-padding: 30px;
+    -fx-font-family: Lucida Sans Unicode, Lucida Grande, Tahoma, sans-serif;
+}
+
+.main-content {
+    -fx-background-image: url("images/background.png");
+}
