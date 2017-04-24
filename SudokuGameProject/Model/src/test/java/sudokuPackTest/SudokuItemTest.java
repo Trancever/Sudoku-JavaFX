@@ -16,7 +16,7 @@ public class SudokuItemTest {
             fields.add(new SudokuField());
             fields.get(i - 1).setValue(i);
         }
-        SudokuItem sudokuItem = new SudokuItem(fields);
+        SudokuItem sudokuItem = new SudokuRow(fields);
         Assert.assertTrue(sudokuItem.verify());
     }
 
@@ -27,7 +27,7 @@ public class SudokuItemTest {
             fields.add(new SudokuField());
             fields.get(i - 1).setValue(i%2);
         }
-        SudokuItem sudokuItem = new SudokuItem(fields);
+        SudokuItem sudokuItem = new SudokuRow(fields);
         Assert.assertFalse(sudokuItem.verify());
     }
 }

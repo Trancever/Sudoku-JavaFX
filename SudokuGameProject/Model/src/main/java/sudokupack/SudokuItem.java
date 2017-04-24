@@ -2,10 +2,12 @@ package sudokupack;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 
-public class SudokuItem {
+public abstract class SudokuItem {
 
     protected ArrayList<SudokuField> values;
 
@@ -55,7 +57,7 @@ public class SudokuItem {
         }
         return true;
     }
-    
+
     @Override
     public int hashCode() {
         return Objects.hashCode(this.values);

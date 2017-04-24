@@ -2,11 +2,13 @@ package sudokupack;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
+
+import java.lang.reflect.Array;
 import java.util.*;
 import java.io.Serializable;
 
 
-public class SudokuBoard implements Serializable {
+public class SudokuBoard implements Serializable, Cloneable {
 
     private ArrayList<ArrayList<SudokuField>> field;
 
@@ -98,6 +100,20 @@ public class SudokuBoard implements Serializable {
             }
         }
         return new SudokuBox(tmp);
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        ArrayList<ArrayList<SudokuField>> newList = new ArrayList<ArrayList<SudokuField>>();
+        for (int i = 0; i < 9; i++) {
+            newList.add(new ArrayList<SudokuField>());
+            for (int j = 0; j < 9; j++) {
+                newList.get(i).add((SudokuField) field.get(i).get(j).clone());
+            }
+        }
+        SudokuBoard board = new SudokuBoard();
+        board.field = newList;
+        return board;
     }
 
     @Override
