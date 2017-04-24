@@ -15,7 +15,7 @@ public class SplashScreenLoader extends Preloader {
     private Stage splashScreen;
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(final Stage stage) throws Exception {
         splashScreen = stage;
         splashScreen.initStyle(StageStyle.TRANSPARENT);
         splashScreen.setScene(createScene());
@@ -31,7 +31,7 @@ public class SplashScreenLoader extends Preloader {
     }
 
     @Override
-    public void handleStateChangeNotification(StateChangeNotification notification) {
+    public void handleStateChangeNotification(final StateChangeNotification notification) {
         if (notification.getType() == StateChangeNotification.Type.BEFORE_START) {
             splashScreen.hide();
         }

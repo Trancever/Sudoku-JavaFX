@@ -20,8 +20,6 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard> {
             fileInputStream = new FileInputStream(filename);
             objectInputStream = new ObjectInputStream(fileInputStream);
             SudokuBoard board = (SudokuBoard) objectInputStream.readObject();
-
-            System.out.println("Object " + board.getClass() + " deserialized succesfully");
             return board;
         } catch (Exception e) {
             e.printStackTrace();
@@ -50,12 +48,8 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard> {
             fileOutputStream = new FileOutputStream(filename);
             objectOutputStream = new ObjectOutputStream(fileOutputStream);
             objectOutputStream.writeObject(obj);
-
-            System.out.println("Object " + obj.getClass() + " serialized succesfully");
-
         } catch (Exception ex) {
             ex.printStackTrace();
-
         } finally {
             if (fileOutputStream != null) {
                 try {
