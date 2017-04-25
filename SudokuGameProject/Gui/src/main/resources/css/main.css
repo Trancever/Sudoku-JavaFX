@@ -1,10 +1,16 @@
 .level-button {
-    -fx-padding: 20px;
-    -fx-border-insets: 20px;
-    -fx-background-insets: 20px;
-    -fx-min-height: 100px;
-    -fx-min-width: 240px;
-    -fx-font-size: 20px;
+    -fx-min-width: 250;
+    -fx-max-width: 250;
+    -fx-min-height: 60;
+    -fx-max-height: 60;
+    -fx-font-size: 30px;
+    -fx-font-weight: 700;
+    -fx-text-fill: white;
+}
+
+.transparent {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
 }
 
 .start-game-label {

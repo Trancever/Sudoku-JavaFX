@@ -14,17 +14,16 @@ public class Main extends Application {
 
     @Override
     public void init() throws Exception {
-        //Wait 3 seconds for splash screen.
-        TimeUnit.MILLISECONDS.sleep(2500);
+        //Wait 2 seconds for splash screen.
+        TimeUnit.SECONDS.sleep(2);
     }
 
     @Override
     public void start(final Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/sample.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/chooseLevelWindow.fxml"));
         primaryStage.setTitle("Sudoku Game");
         primaryStage.getIcons().add(new Image("images/sudoku.png"));
         primaryStage.setScene(new Scene(root, 450, 660));
-        primaryStage.getScene().getStylesheets().add("css/main.css");
         primaryStage.setResizable(false);
         primaryStage.show();
     }

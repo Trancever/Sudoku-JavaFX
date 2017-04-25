@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<GridPane alignment="center" hgap="10" maxHeight="670.0" maxWidth="450.0" minHeight="670.0" minWidth="450.0" prefHeight="670.0" prefWidth="450.0" styleClass="main-content" vgap="10" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ChooseLevelWindowController">
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
+   <children>
+      <AnchorPane maxHeight="670.0" maxWidth="450.0" minHeight="670.0" minWidth="450.0" prefHeight="670.0" prefWidth="450.0" styleClass="main-content" stylesheets="@../css/main.css" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+         <children>
+            <VBox alignment="TOP_CENTER" layoutX="125.0" layoutY="163.0" prefHeight="600.0" prefWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Button fx:id="easyButton" mnemonicParsing="false" onAction="#onEasyButtonClick" text="Easy">
+                     <VBox.margin>
+                        <Insets bottom="18.0" top="280.0" />
+                     </VBox.margin>
+                     <styleClass>
+                        <String fx:value="level-button" />
+                        <String fx:value="transparent" />
+                     </styleClass>
+                  </Button>
+                  <Button fx:id="mediumButton" mnemonicParsing="false" onAction="#onMediumButtonClick" text="Medium">
+                     <VBox.margin>
+                        <Insets bottom="18.0" />
+                     </VBox.margin>
+                     <styleClass>
+                        <String fx:value="level-button" />
+                        <String fx:value="transparent" />
+                     </styleClass>
+                  </Button>
+                  <Button fx:id="hardButton" mnemonicParsing="false" onAction="#onHardButtonClick" text="Hard">
+                     <VBox.margin>
+                        <Insets bottom="18.0" />
+                     </VBox.margin>
+                     <styleClass>
+                        <String fx:value="level-button" />
+                        <String fx:value="transparent" />
+                     </styleClass>
+                  </Button>
+                  <Button fx:id="exitButton" mnemonicParsing="false" onAction="#onExitButtonClick" text="Exit">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <styleClass>
+                        <String fx:value="level-button" />
+                        <String fx:value="transparent" />
+                     </styleClass>
+                  </Button>
+               </children></VBox>
+         </children></AnchorPane>
+   </children>
+</GridPane>
