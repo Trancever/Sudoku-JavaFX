@@ -23,7 +23,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/chooseLevelWindow.fxml"));
         primaryStage.setTitle("Sudoku Game");
         primaryStage.getIcons().add(new Image("images/sudoku.png"));
-        primaryStage.setScene(new Scene(root, 450, 660));
+        primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
         primaryStage.show();
     }

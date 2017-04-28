@@ -24,3 +24,17 @@
 .main-content {
     -fx-background-image: url("images/background.png");
 }
+
+.insert-number-button {
+    -fx-min-width: 45;
+    -fx-min-height: 45;
+}
+
+.insert-number-button-layout {
+    -fx-spacing: 15;
+}
+
+.sudokuField {
+    -fx-border-width: 0.5;
+    -fx-border-color: #888;
+}

@@ -1,9 +1,10 @@
-package sample;
+package sample.controllers;
 
 import javafx.fxml.FXML;
 
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import sample.MainSudokuWindow;
 
 public class ChooseLevelWindowController {
 
@@ -22,6 +23,14 @@ public class ChooseLevelWindowController {
     @FXML
     public void onEasyButtonClick() {
         System.out.println("Hehe dziala przycisk easy!");
+        MainSudokuWindow window = new MainSudokuWindow();
+        try {
+            window.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Stage stage = (Stage) easyButton.getScene().getWindow();
+        stage.hide();
     }
 
     @FXML
