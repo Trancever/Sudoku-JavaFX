@@ -28,4 +28,8 @@ public class MainSudokuWindow {
         this.stage.setResizable(false);
         this.stage.show();
     }
+
+    public MainSudokuWindowController getController() {
+        return this.controller;
+    }
 }

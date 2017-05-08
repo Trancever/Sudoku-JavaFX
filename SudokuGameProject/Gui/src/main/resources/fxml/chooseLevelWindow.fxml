@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
@@ -17,46 +21,49 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <AnchorPane maxHeight="670.0" maxWidth="450.0" minHeight="670.0" minWidth="450.0" prefHeight="670.0" prefWidth="450.0" styleClass="main-content" stylesheets="@../css/main.css" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+      <AnchorPane maxHeight="670.0" maxWidth="450.0" minHeight="670.0" minWidth="450.0" prefHeight="670.0" prefWidth="450.0" stylesheets="@../css/main.css" GridPane.halignment="CENTER" GridPane.valignment="TOP">
          <children>
             <VBox alignment="TOP_CENTER" layoutX="125.0" layoutY="163.0" prefHeight="600.0" prefWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Button fx:id="easyButton" mnemonicParsing="false" onAction="#onEasyButtonClick" text="Easy">
+                  <Label styleClass="start-game-label" text="%game" />
+                  <Label styleClass="start-game-label" text="%welcome" />
+                  <Button fx:id="easyButton" mnemonicParsing="false" onAction="#onEasyButtonClick" styleClass="level-button" text="%easyButton">
                      <VBox.margin>
-                        <Insets bottom="18.0" top="280.0" />
+                        <Insets bottom="18.0" top="100.0" />
                      </VBox.margin>
-                     <styleClass>
-                        <String fx:value="level-button" />
-                        <String fx:value="transparent" />
-                     </styleClass>
                   </Button>
-                  <Button fx:id="mediumButton" mnemonicParsing="false" onAction="#onMediumButtonClick" text="Medium">
+                  <Button fx:id="mediumButton" mnemonicParsing="false" onAction="#onMediumButtonClick" styleClass="level-button" text="%mediumButton">
                      <VBox.margin>
                         <Insets bottom="18.0" />
                      </VBox.margin>
-                     <styleClass>
-                        <String fx:value="level-button" />
-                        <String fx:value="transparent" />
-                     </styleClass>
                   </Button>
-                  <Button fx:id="hardButton" mnemonicParsing="false" onAction="#onHardButtonClick" text="Hard">
+                  <Button fx:id="hardButton" mnemonicParsing="false" onAction="#onHardButtonClick" styleClass="level-button" text="%hardButton">
                      <VBox.margin>
                         <Insets bottom="18.0" />
                      </VBox.margin>
-                     <styleClass>
-                        <String fx:value="level-button" />
-                        <String fx:value="transparent" />
-                     </styleClass>
                   </Button>
-                  <Button fx:id="exitButton" mnemonicParsing="false" onAction="#onExitButtonClick" text="Exit">
+                  <Button fx:id="exitButton" mnemonicParsing="false" onAction="#onExitButtonClick" styleClass="level-button" text="%exitButton">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
-                     <styleClass>
-                        <String fx:value="level-button" />
-                        <String fx:value="transparent" />
-                     </styleClass>
                   </Button>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <RadioButton mnemonicParsing="false" selected="true">
+                           <graphic>
+                              <Pane prefHeight="30.0" prefWidth="40.0" styleClass="polish-flag" />
+                           </graphic>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="group" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton mnemonicParsing="false" toggleGroup="$group">
+                           <graphic>
+                              <Pane prefHeight="30.0" prefWidth="40.0" styleClass="us-flag" />
+                           </graphic>
+                        </RadioButton>
+                     </children>
+                  </HBox>
                </children></VBox>
          </children></AnchorPane>
    </children>

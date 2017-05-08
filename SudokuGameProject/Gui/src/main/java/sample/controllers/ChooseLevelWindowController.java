@@ -1,10 +1,14 @@
 package sample.controllers;
 
+import game.Game;
+import game.GameLevel;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import sample.MainSudokuWindow;
+import sudokupack.BackTrackingSudokuSolver;
 
 public class ChooseLevelWindowController {
 
@@ -26,6 +30,7 @@ public class ChooseLevelWindowController {
         MainSudokuWindow window = new MainSudokuWindow();
         try {
             window.start();
+            window.getController().setGame(new Game(GameLevel.EASY, new BackTrackingSudokuSolver()));
         } catch (Exception e) {
             e.printStackTrace();
         }

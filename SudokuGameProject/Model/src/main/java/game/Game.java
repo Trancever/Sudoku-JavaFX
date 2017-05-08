@@ -8,6 +8,7 @@ public class Game {
     private GameLevel gameLevel;
     private SudokuBoard sudokuBoard;
     private SudokuSolver sudokuSolver;
+    private int currentTime;
 
     public Game(final GameLevel gameLevel, final SudokuSolver sudokuSolver) {
         this.gameLevel = gameLevel;
@@ -15,5 +16,9 @@ public class Game {
         this.sudokuBoard = new SudokuBoard();
         this.sudokuSolver = sudokuSolver;
         this.sudokuSolver.solve(this.sudokuBoard);
+    }
+
+    public SudokuBoard getSudokuBoard() {
+        return this.sudokuBoard;
     }
 }

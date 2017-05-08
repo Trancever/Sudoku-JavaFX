@@ -5,7 +5,7 @@
     -fx-max-height: 60;
     -fx-font-size: 30px;
     -fx-font-weight: 700;
-    -fx-text-fill: white;
+    -fx-text-fill: #333333;
 }
 
 .transparent {
@@ -14,10 +14,10 @@
 }
 
 .start-game-label {
-    -fx-font-size: 22px;
-    -fx-font-weight: 500;
+    -fx-font-size: 40px;
+    -fx-font-weight: 600;
     -fx-alignment: center;
-    -fx-label-padding: 30px;
+    -fx-padding: 40 0 0 0;
     -fx-font-family: Lucida Sans Unicode, Lucida Grande, Tahoma, sans-serif;
 }
 
@@ -37,4 +37,16 @@
 .sudokuField {
     -fx-border-width: 0.5;
     -fx-border-color: #888;
+}
+
+.polish-flag {
+    -fx-background-image: url("images/polish_flag.png");
+    -fx-background-position: center;
+    -fx-background-size: cover;
+}
+
+.us-flag {
+    -fx-background-image: url("images/us_flag.png");
+    -fx-background-position: center;
+    -fx-background-size: cover;
 }
