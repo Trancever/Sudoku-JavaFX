@@ -13,7 +13,8 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<GridPane alignment="center" hgap="10" maxHeight="670.0" maxWidth="450.0" minHeight="670.0" minWidth="450.0" prefHeight="670.0" prefWidth="450.0" styleClass="main-content" vgap="10" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.ChooseLevelWindowController">
+<?import javafx.scene.text.Font?>
+<GridPane alignment="center" hgap="10" maxHeight="670.0" maxWidth="450.0" minHeight="670.0" minWidth="450.0" prefHeight="670.0" prefWidth="450.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.ChooseLevelWindowController">
    <columnConstraints>
       <ColumnConstraints />
    </columnConstraints>
@@ -21,15 +22,14 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <AnchorPane maxHeight="670.0" maxWidth="450.0" minHeight="670.0" minWidth="450.0" prefHeight="670.0" prefWidth="450.0" stylesheets="@../css/main.css" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+      <AnchorPane maxHeight="670.0" maxWidth="450.0" minHeight="670.0" minWidth="450.0" prefHeight="670.0" prefWidth="450.0" styleClass="main-content" stylesheets="@../css/main.css" GridPane.halignment="CENTER" GridPane.valignment="TOP">
          <children>
             <VBox alignment="TOP_CENTER" layoutX="125.0" layoutY="163.0" prefHeight="600.0" prefWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Label styleClass="start-game-label" text="%game" />
-                  <Label styleClass="start-game-label" text="%welcome" />
+                  <Label styleClass="start-game-label" text="%game"/>
                   <Button fx:id="easyButton" mnemonicParsing="false" onAction="#onEasyButtonClick" styleClass="level-button" text="%easyButton">
                      <VBox.margin>
-                        <Insets bottom="18.0" top="100.0" />
+                        <Insets bottom="18.0" top="180.0" />
                      </VBox.margin>
                   </Button>
                   <Button fx:id="mediumButton" mnemonicParsing="false" onAction="#onMediumButtonClick" styleClass="level-button" text="%mediumButton">

@@ -1,9 +1,9 @@
 .level-button {
-    -fx-min-width: 250;
-    -fx-max-width: 250;
+    -fx-min-width: 180;
+    -fx-max-width: 180;
     -fx-min-height: 60;
     -fx-max-height: 60;
-    -fx-font-size: 30px;
+    -fx-font-size: 24px;
     -fx-font-weight: 700;
     -fx-text-fill: #333333;
 }
@@ -12,13 +12,19 @@
     -fx-background-color: transparent;
     -fx-border-color: transparent;
 }
+@font-face {
+    font-family: "DomoAregato";
+    font-style: normal;
+    font-weight: normal;
+    src: local("fonts/DomoAregato.ttf"), format("TrueType");
+}
 
 .start-game-label {
     -fx-font-size: 40px;
-    -fx-font-weight: 600;
+    -fx-font-weight: normal;
     -fx-alignment: center;
-    -fx-padding: 40 0 0 0;
-    -fx-font-family: Lucida Sans Unicode, Lucida Grande, Tahoma, sans-serif;
+    -fx-padding: 10 0 0 0;
+    -fx-font-family: "DomoAregato";
 }
 
 .main-content {
@@ -57,5 +63,5 @@
 
 .nationalization-hbox {
     -fx-alignment: center;
-    -fx-padding: 10 0 0 0;
+    -fx-padding: 80 0 -10 0;
 }
