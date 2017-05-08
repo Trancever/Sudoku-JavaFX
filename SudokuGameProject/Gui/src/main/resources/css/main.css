@@ -50,3 +50,12 @@
     -fx-background-position: center;
     -fx-background-size: cover;
 }
+
+.nationalization-radio-button {
+    -fx-padding: 0 40 0 40;
+}
+
+.nationalization-hbox {
+    -fx-alignment: center;
+    -fx-padding: 10 0 0 0;
+}

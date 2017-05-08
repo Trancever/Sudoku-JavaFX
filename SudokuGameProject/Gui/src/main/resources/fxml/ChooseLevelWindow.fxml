@@ -47,9 +47,9 @@
                         <Insets />
                      </VBox.margin>
                   </Button>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="nationalization-hbox">
                      <children>
-                        <RadioButton mnemonicParsing="false" selected="true">
+                        <RadioButton fx:id="polishRadioButton" mnemonicParsing="false" onAction="#onRadioToggleGroupToggled" styleClass="nationalization-radio-button">
                            <graphic>
                               <Pane prefHeight="30.0" prefWidth="40.0" styleClass="polish-flag" />
                            </graphic>
@@ -57,7 +57,7 @@
                               <ToggleGroup fx:id="group" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton mnemonicParsing="false" toggleGroup="$group">
+                        <RadioButton fx:id="usRadioButton" mnemonicParsing="false" onAction="#onRadioToggleGroupToggled" styleClass="nationalization-radio-button" toggleGroup="$group">
                            <graphic>
                               <Pane prefHeight="30.0" prefWidth="40.0" styleClass="us-flag" />
                            </graphic>

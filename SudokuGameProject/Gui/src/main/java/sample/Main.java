@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import javax.annotation.Resource;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
@@ -25,7 +24,7 @@ public class Main extends Application {
     public void start(final Stage primaryStage) throws Exception {
         Locale locale = new Locale("pl", "PL");
         ResourceBundle bundle = ResourceBundle.getBundle("MyBundle", locale);
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/chooseLevelWindow.fxml"), bundle);
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/ChooseLevelWindow.fxml"), bundle);
         primaryStage.setTitle("Sudoku Game");
         primaryStage.getIcons().add(new Image("images/sudoku.png"));
         primaryStage.setScene(new Scene(root));
