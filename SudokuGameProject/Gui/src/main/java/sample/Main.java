@@ -24,6 +24,7 @@ public class Main extends Application {
     @Override
     public void start(final Stage primaryStage) throws Exception {
         Locale locale = new Locale("pl", "PL");
+        ApplicationSettings.getInstance().setCurrentLocale(locale);
         ResourceBundle bundle = ResourceBundle.getBundle("MyBundle", locale);
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/ChooseLevelWindow.fxml"), bundle);
         primaryStage.setTitle("Sudoku Game");
