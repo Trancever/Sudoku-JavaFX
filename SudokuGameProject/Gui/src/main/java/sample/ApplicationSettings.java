@@ -1,5 +1,7 @@
 package sample;
 
+import game.Game;
+
 import java.util.Locale;
 
 /**
@@ -8,6 +10,16 @@ import java.util.Locale;
 public class ApplicationSettings {
 
     private Locale currentLocale;
+
+    private Game game;
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(final Game game) {
+        this.game = game;
+    }
 
     public void setCurrentLocale(final Locale locale) {
         this.currentLocale = locale;

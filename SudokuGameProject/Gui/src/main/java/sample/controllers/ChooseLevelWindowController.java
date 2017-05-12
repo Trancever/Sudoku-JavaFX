@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
+import sample.ApplicationSettings;
 import sample.MainSudokuWindow;
 import sudokupack.BackTrackingSudokuSolver;
 
@@ -67,8 +68,8 @@ public class ChooseLevelWindowController {
     private void runGame(GameLevel level) {
         MainSudokuWindow window = new MainSudokuWindow();
         try {
+            ApplicationSettings.getInstance().setGame(new Game(level, new BackTrackingSudokuSolver()));
             window.start();
-            window.getController().setGame(new Game(level, new BackTrackingSudokuSolver()));
         } catch (Exception e) {
             e.printStackTrace();
         }

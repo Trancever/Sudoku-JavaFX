@@ -45,6 +45,7 @@
 .insert-number-button {
     -fx-min-width: 45;
     -fx-min-height: 45;
+    -fx-alignment: center;
 }
 
 .insert-number-button-layout {

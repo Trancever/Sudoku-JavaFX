@@ -22,8 +22,8 @@ public class MainSudokuWindow {
     public void start() throws Exception {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation((getClass().getClassLoader().getResource("fxml/MainSudokuWindow.fxml")));
-        this.controller = loader.getController();
         this.scene = new Scene((Parent)loader.load());
+        this.controller = loader.getController();
         this.stage = new Stage();
         this.stage.setTitle("Sudoku Game");
         this.stage.setScene(scene);
