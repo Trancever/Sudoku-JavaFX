@@ -2,9 +2,9 @@ package game;
 
 public enum GameLevel {
 
-    EASY(20),
+    EASY(30),
     MEDIUM(40),
-    HARD(60);
+    HARD(50);
 
     private int numberOfFieldsToDelete;
 

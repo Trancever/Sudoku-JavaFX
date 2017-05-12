@@ -21,4 +21,8 @@ public class Game {
     public SudokuBoard getSudokuBoard() {
         return this.sudokuBoard;
     }
+
+    public void cleanFields() {
+        sudokuBoard.cleanRandomlyFields(gameLevel.getNumberOfFieldsToDelete());
+    }
 }

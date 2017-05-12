@@ -102,6 +102,18 @@ public class SudokuBoard implements Serializable, Cloneable {
         return new SudokuBox(tmp);
     }
 
+    public void cleanRandomlyFields(int amount) {
+        Random random = new Random();
+        while(amount > 0) {
+            int row = random.nextInt(9);
+            int col = random.nextInt(9);
+            if (this.getValue(row, col) != 0) {
+                this.setValue(row, col, 0);
+                amount--;
+            }
+        }
+    }
+
     @Override
     protected Object clone() throws CloneNotSupportedException {
         ArrayList<ArrayList<SudokuField>> newList = new ArrayList<ArrayList<SudokuField>>();
