@@ -3,6 +3,7 @@ package sample.controllers;
 import game.Game;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import sample.ApplicationSettings;
@@ -24,29 +25,11 @@ public class MainSudokuWindowController {
 
     @FXML
     public void initialize() {
-        this.currentSelectedField = null;
-        for (int x = 0; x < 9; x++) {
-            for (int y = 0; y < 9; y++) {
-                this.game = ApplicationSettings.getInstance().getGame();
-                FieldPane pane = new FieldPane(x, y);
-                pane.setLabelText(Integer.toString(this.game.getSudokuBoard().getValue(x, y)));
-                pane.setStyle("-fx-border-width: 0.5px; -fx-border-color: #888;");
-                pane.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-                    public void handle(MouseEvent event) {
-                        FieldPane pane = (FieldPane) event.getSource();
-                        System.out.println(pane.toString() + " clicked. Position " + pane.getX() + " " + pane.getY());
-                        if (currentSelectedField != null && currentSelectedField.equals(pane)) {
-                            pane.setStyle("-fx-border-width: 0.5px; -fx-border-color: #888;");
-                            currentSelectedField = null;
-                        } else {
-                            pane.setStyle("-fx-border-color: #00aaa0; -fx-border-width: 1px;");
-                            currentSelectedField = pane;
-                        }
-                    }
-                });
-                sudokuGrid.add(pane, y, x);
-            }
-        }
+        initializeSudokuGrid();
+        initializeButtons();
+    }
+
+    private void initializeButtons() {
         for (int x = 0; x < 10; x++) {
             NumberButton button = new NumberButton(x);
             button.getStyleClass().add("insert-number-button");
@@ -74,8 +57,35 @@ public class MainSudokuWindowController {
         }
     }
 
-    @FXML
-    public void onNumberButtonMouseClicked(MouseEvent event) {
-        System.out.println("Button clicked");
+    private void initializeSudokuGrid() {
+        this.currentSelectedField = null;
+        for (int x = 0; x < 9; x++) {
+            for (int y = 0; y < 9; y++) {
+                this.game = ApplicationSettings.getInstance().getGame();
+                FieldPane pane = new FieldPane(x, y);
+                pane.setLabelText(Integer.toString(this.game.getSudokuBoard().getValue(x, y)));
+                pane.getStyleClass().add("sudokuField");
+                pane.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+                    public void handle(MouseEvent event) {
+                        FieldPane pane = (FieldPane) event.getSource();
+                        for (Node field : sudokuGrid.getChildren()) {
+                            if (field != pane) {
+                                field.getStyleClass().remove("sudokuFieldSelected");
+                            }
+                        }
+
+                        System.out.println(pane.toString() + " clicked. Position " + pane.getX() + " " + pane.getY());
+                        if (currentSelectedField != null && currentSelectedField.equals(pane)) {
+                            pane.getStyleClass().remove("sudokuFieldSelected");
+                            currentSelectedField = null;
+                        } else {
+                            pane.getStyleClass().add("sudokuFieldSelected");
+                            currentSelectedField = pane;
+                        }
+                    }
+                });
+                sudokuGrid.add(pane, y, x);
+            }
+        }
     }
 }

@@ -57,6 +57,11 @@
     -fx-border-color: #888;
 }
 
+.sudokuFieldSelected {
+    -fx-border-color: #00aaa0;
+    -fx-border-width: 1px;
+}
+
 .polish-flag {
     -fx-background-image: url("images/polish_flag.png");
     -fx-background-position: center;
