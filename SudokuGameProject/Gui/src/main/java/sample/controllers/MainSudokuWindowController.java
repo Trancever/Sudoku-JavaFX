@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Font;
 import sample.ApplicationSettings;
 import sample.CustomWidgets.FieldPane;
 import sample.CustomWidgets.NumberButton;
@@ -71,8 +70,8 @@ public class MainSudokuWindowController {
                 sudokuGrid.getChildren().add(grid);
                 for (int w = 0; w < 3; w++) {
                     for (int z = 0; z < 3; z++) {
-                        FieldPane pane = new FieldPane(x * 3 + w, y * 3 + z);
-                        pane.setLabelText(Integer.toString(this.game.getSudokuBoard().getValue(x * 3 + w, y * 3 + z)));
+                        FieldPane pane = new FieldPane(x * 3 + w, y * 3 + z,
+                                Integer.toString(this.game.getSudokuBoard().getValue(x * 3 + w, y * 3 + z)));
                         this.addSudokuFieldEvent(pane);
                         GridPane.setConstraints(pane, z, w);
                         grid.getChildren().add(pane);
@@ -86,21 +85,23 @@ public class MainSudokuWindowController {
         pane.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 FieldPane pane = (FieldPane) event.getSource();
-                for (Node node : sudokuGrid.getChildren()) {
-                    GridPane innerGrid = (GridPane) node;
-                    for (Node field : innerGrid.getChildren()) {
-                        if (field != pane) {
-                            field.getStyleClass().remove("sudokuFieldSelected");
+                if (pane.isChangeable()) {
+                    for (Node node : sudokuGrid.getChildren()) {
+                        GridPane innerGrid = (GridPane) node;
+                        for (Node field : innerGrid.getChildren()) {
+                            if (field != pane) {
+                                field.getStyleClass().remove("sudokuFieldSelected");
+                            }
                         }
                     }
-                }
-                System.out.println(pane.toString() + " clicked. Position " + pane.getX() + " " + pane.getY());
-                if (currentSelectedField != null && currentSelectedField.equals(pane)) {
-                    pane.getStyleClass().remove("sudokuFieldSelected");
-                    currentSelectedField = null;
-                } else {
-                    pane.getStyleClass().add("sudokuFieldSelected");
-                    currentSelectedField = pane;
+                    System.out.println(pane.toString() + " clicked. Position " + pane.getX() + " " + pane.getY());
+                    if (currentSelectedField != null && currentSelectedField.equals(pane)) {
+                        pane.getStyleClass().remove("sudokuFieldSelected");
+                        currentSelectedField = null;
+                    } else {
+                        pane.getStyleClass().add("sudokuFieldSelected");
+                        currentSelectedField = pane;
+                    }
                 }
             }
         });
