@@ -1,7 +1,10 @@
 package sample.CustomWidgets;
 
+import game.ApplicationSettings;
 import javafx.scene.control.Button;
 import javafx.scene.text.Font;
+
+import java.util.ResourceBundle;
 
 /**
  * Created by Trensik on 5/12/2017.
@@ -22,7 +25,9 @@ public class NumberButton extends Button {
         Font font = new Font("Arial", 20);
         this.setFont(font);
         if (number == 0) {
-            this.setText("clear");
+            ResourceBundle bundle = ResourceBundle.getBundle("MyBundle",
+                    ApplicationSettings.getInstance().getCurrentLocale());
+            this.setText(bundle.getString("clearButton"));
         } else {
         }
     }

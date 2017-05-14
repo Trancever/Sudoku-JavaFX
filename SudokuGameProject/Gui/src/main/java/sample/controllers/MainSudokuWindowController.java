@@ -1,15 +1,13 @@
 package sample.controllers;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import game.Game;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import sample.ApplicationSettings;
+import game.ApplicationSettings;
 import sample.CustomWidgets.FieldPane;
 import sample.CustomWidgets.NumberButton;
 

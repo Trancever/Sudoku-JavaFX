@@ -10,7 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.stage.Stage;
-import sample.ApplicationSettings;
+import game.ApplicationSettings;
 import sample.MainSudokuWindow;
 import sudokupack.BackTrackingSudokuSolver;
 
@@ -93,5 +93,6 @@ public class ChooseLevelWindowController {
         Parent root = (Parent) FXMLLoader.load(getClass().getClassLoader().getResource("fxml/ChooseLevelWindow.fxml"),
                 ResourceBundle.getBundle("MyBundle", locale));
         scene.setRoot(root);
+        ApplicationSettings.getInstance().setCurrentLocale(locale);
     }
 }

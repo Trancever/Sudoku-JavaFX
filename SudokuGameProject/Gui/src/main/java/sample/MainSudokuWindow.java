@@ -1,5 +1,6 @@
 package sample;
 
+import game.ApplicationSettings;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,24 +16,19 @@ import java.util.ResourceBundle;
  */
 public class MainSudokuWindow {
 
-    private MainSudokuWindowController controller;
     private Stage stage;
     private Scene scene;
 
     public void start() throws Exception {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation((getClass().getClassLoader().getResource("fxml/MainSudokuWindow.fxml")));
-        this.scene = new Scene((Parent)loader.load());
-        this.controller = loader.getController();
+        ResourceBundle bundle = ResourceBundle.getBundle("MyBundle",
+                ApplicationSettings.getInstance().getCurrentLocale());
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/MainSudokuWindow.fxml"), bundle);
+        this.scene = new Scene(root);
         this.stage = new Stage();
         this.stage.setTitle("Sudoku Game");
         this.stage.setScene(scene);
         this.stage.getIcons().add(new Image("images/sudoku.png"));
         this.stage.setResizable(false);
         this.stage.show();
-    }
-
-    public MainSudokuWindowController getController() {
-        return this.controller;
     }
 }

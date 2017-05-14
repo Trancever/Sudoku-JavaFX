@@ -1,6 +1,4 @@
-package sample;
-
-import game.Game;
+package game;
 
 import java.util.Locale;
 
@@ -12,6 +10,8 @@ public class ApplicationSettings {
     private Locale currentLocale;
 
     private Game game;
+
+    private final static String SAVE_FILE_PATH = "save/saved.xD";
 
     public Game getGame() {
         return game;
