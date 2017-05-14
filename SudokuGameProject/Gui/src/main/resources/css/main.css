@@ -59,7 +59,7 @@
 
 .sudokuFieldSelected {
     -fx-border-color: #00aaa0;
-    -fx-border-width: 1px;
+    -fx-border-width: 5px;
 }
 
 .polish-flag {

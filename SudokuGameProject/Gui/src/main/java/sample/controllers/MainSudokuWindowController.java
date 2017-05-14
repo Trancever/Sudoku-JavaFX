@@ -3,9 +3,12 @@ package sample.controllers;
 import game.Game;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Font;
 import sample.ApplicationSettings;
 import sample.CustomWidgets.FieldPane;
 import sample.CustomWidgets.NumberButton;
@@ -37,8 +40,10 @@ public class MainSudokuWindowController {
             NumberButton button = new NumberButton(x);
             button.getStyleClass().add("insert-number-button");
             button.setText(Integer.toString(button.getNumber()));
+            Font font = new Font("Arial", 20);
+            button.setFont(font);
             if (x == 0) {
-                button.setText("reset");
+                button.setText("clear");
                 buttonsGrid.add(button, 0, 9);
             } else {
                 buttonsGrid.add(button, 0, x - 1);
@@ -75,6 +80,9 @@ public class MainSudokuWindowController {
                             labelText = "";
                         }
                         pane.setLabelText(labelText);
+                        Font font = new Font("Arial", 48);
+                        pane.setLabelFont(font);
+
                         pane.getStyleClass().add("sudokuField");
                         pane.setStyle("-fx-pref-width: 10em; -fx-pref-height: 10em;");
                         pane.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
