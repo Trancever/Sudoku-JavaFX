@@ -2,7 +2,7 @@ package game;
 
 public enum GameLevel {
 
-    EASY(30),
+    EASY(10),
     MEDIUM(40),
     HARD(50);
 

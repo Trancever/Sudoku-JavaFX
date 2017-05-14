@@ -45,7 +45,7 @@ public class SudokuBoard implements Serializable, Cloneable {
     }
 
     public int getValue(final int row, final int col) {
-        if (col < 0 || col > 8 || row <  0 || row > 8) {
+        if (col < 0 || col > 8 || row < 0 || row > 8) {
             throw new IndexOutOfBoundsException("Wrong parameters of getValue. Given row = " + row
                     + " expected from 0 to 8. " + "Given column = " + col + " expected from 0 to 8.");
         }
@@ -54,7 +54,7 @@ public class SudokuBoard implements Serializable, Cloneable {
     }
 
     public void setValue(final int row, final int col, final int value) throws IndexOutOfBoundsException {
-        if (col < 0 || col > 8 || row <  0 || row > 8) {
+        if (col < 0 || col > 8 || row < 0 || row > 8) {
             throw new IndexOutOfBoundsException("Wrong parameters of setValue. Given row = " + row
                     + " expected from 0 to 8. " + "Given column = " + col + " expected from 0 to 8.");
         }
@@ -86,7 +86,7 @@ public class SudokuBoard implements Serializable, Cloneable {
     }
 
     public SudokuBox getBox(final int row, final int column) throws IndexOutOfBoundsException {
-        if (column < 0 || column > 8 || row <  0 || row > 8) {
+        if (column < 0 || column > 8 || row < 0 || row > 8) {
             throw new IndexOutOfBoundsException("Wrong Box. Given row = " + row + " expected from 0 to 8. "
                     + "Given column = " + column + " expected from 0 to 8.");
         }
@@ -103,7 +103,7 @@ public class SudokuBoard implements Serializable, Cloneable {
 
     public void cleanRandomlyFields(int amount) {
         Random random = new Random();
-        while(amount > 0) {
+        while (amount > 0) {
             int row = random.nextInt(ROWS);
             int col = random.nextInt(COLUMNS);
             if (this.getValue(row, col) != 0) {
@@ -111,6 +111,25 @@ public class SudokuBoard implements Serializable, Cloneable {
                 amount--;
             }
         }
+    }
+
+    public boolean isSolved() {
+        boolean solved = true;
+        int i = 0;
+        int j = 0;
+        for (; i < ROWS; i++, j++) {
+            if (!this.getRow(i).isSolved() || !this.getColumn(j).isSolved()) {
+                return false;
+            }
+        }
+        for (i = 0; i < 3; i++) {
+            for (j = 0; j < 3; j++) {
+                if (!this.getBox(i, j).isSolved()) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     @Override
@@ -132,7 +151,7 @@ public class SudokuBoard implements Serializable, Cloneable {
         return MoreObjects.toStringHelper(this.getClass())
                 .add("field", field).toString();
     }
-    
+
     @Override
     public boolean equals(final Object obj) {
         if (obj == null) {
@@ -155,10 +174,10 @@ public class SudokuBoard implements Serializable, Cloneable {
         }
         return true;
     }
-    
+
     @Override
     public int hashCode() {
         return Objects.hashCode(this.field);
     }
-    
+
 }

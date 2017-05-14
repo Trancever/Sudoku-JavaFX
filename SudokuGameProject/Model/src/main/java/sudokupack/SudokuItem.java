@@ -26,17 +26,30 @@ public abstract class SudokuItem {
         }
         return true;
     }
-    
+
+    public boolean isSolved() {
+        HashSet<Integer> set = new HashSet<Integer>();
+        for (int i = 0; i < values.size(); i++) {
+            if (values.get(i).getValue() == 0) {
+                return false;
+            }
+            if (!set.add(values.get(i).getValue())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     private ArrayList<SudokuField> getAll() {
         return this.values;
     }
-    
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this.getClass()).add("values", values)
                 .toString();
     }
-    
+
     @Override
     public boolean equals(final Object obj) {
         if (obj == null) {

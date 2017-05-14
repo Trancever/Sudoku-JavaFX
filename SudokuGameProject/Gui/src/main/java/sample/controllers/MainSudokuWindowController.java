@@ -1,9 +1,12 @@
 package sample.controllers;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import game.Game;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import sample.ApplicationSettings;
@@ -55,7 +58,14 @@ public class MainSudokuWindowController {
                     } else {
                         currentSelectedField.setLabelText(button.getText());
                     }
-
+                    game.getSudokuBoard().setValue(currentSelectedField.getX(), currentSelectedField.getY(), button.getNumber());
+                    System.out.println("Gra rozwiazana? " + Boolean.toString(game.getSudokuBoard().isSolved()));
+                    if (game.getSudokuBoard().isSolved()) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("You won");
+                        alert.setHeaderText("Sudoku solved, congratulation");
+                        alert.showAndWait();
+                    }
                 }
             }
         });
