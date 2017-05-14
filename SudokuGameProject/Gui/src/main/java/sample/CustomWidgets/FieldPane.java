@@ -1,6 +1,5 @@
 package sample.CustomWidgets;
 
-import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
@@ -31,13 +30,15 @@ public class FieldPane extends Pane {
         this.getChildren().add(label);
         this.label.layoutXProperty().bind(this.widthProperty().subtract(this.label.widthProperty()).divide(2));
         this.label.layoutYProperty().bind(this.heightProperty().subtract(this.label.heightProperty()).divide(2));
+        this.label.setFont(new Font("Arial", 48));
+        this.getStyleClass().add("sudokuField");
+        this.setStyle("-fx-pref-width: 10em; -fx-pref-height: 10em;");
     }
 
-    public void setLabelText(final String text) {
+    public void setLabelText(String text) {
+        if (text.equals("0")) {
+            text = "";
+        }
         this.label.setText(text);
-    }
-
-    public void setLabelFont(final Font font) {
-        this.label.setFont(font);
     }
 }

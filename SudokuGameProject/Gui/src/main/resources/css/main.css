@@ -62,6 +62,12 @@
     -fx-border-width: 5px;
 }
 
+.sudoku-grid-border {
+    -fx-background-color: black, -fx-control-inner-background;
+    -fx-background-insets: 0, 1;
+    -fx-padding: 1;
+}
+
 .polish-flag {
     -fx-background-image: url("images/polish_flag.png");
     -fx-background-position: center;
