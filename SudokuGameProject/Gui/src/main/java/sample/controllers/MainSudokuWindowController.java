@@ -5,11 +5,19 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import game.ApplicationSettings;
+import javafx.stage.Stage;
 import sample.CustomWidgets.FieldPane;
 import sample.CustomWidgets.NumberButton;
+import sample.Main;
+import sudokupack.Dao;
+import sudokupack.SudokuBoard;
+import sudokupack.SudokuBoardDaoFactory;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 
 public class MainSudokuWindowController {
@@ -23,6 +31,15 @@ public class MainSudokuWindowController {
 
     @FXML
     private GridPane buttonsGrid;
+
+    @FXML
+    private Button resetGameButton;
+
+    @FXML
+    private Button saveStateButton;
+
+    @FXML
+    private Button newGameButton;
 
     @FXML
     public void initialize() {
@@ -57,7 +74,6 @@ public class MainSudokuWindowController {
                         currentSelectedField.setLabelText(button.getText());
                     }
                     game.getSudokuBoard().setValue(currentSelectedField.getX(), currentSelectedField.getY(), button.getNumber());
-                    System.out.println("Gra rozwiazana? " + Boolean.toString(game.getSudokuBoard().isSolved()));
                     if (game.getSudokuBoard().isSolved()) {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("You won");
@@ -113,5 +129,31 @@ public class MainSudokuWindowController {
                 }
             }
         });
+    }
+
+    @FXML
+    public void onResetGameButtonClicked() {
+        for (Node node : sudokuGrid.getChildren()) {
+            GridPane innerGrid = (GridPane) node;
+            for (Node field : innerGrid.getChildren()) {
+                FieldPane pane = (FieldPane) field;
+                if (pane.isChangeable()) {
+                    this.game.getSudokuBoard().setValue(pane.getX(), pane.getX(), 0);
+                    pane.setLabelText("0");
+                }
+            }
+        }
+    }
+
+    @FXML
+    public void onNewGameButtonClicked() {
+        //TODO: Close this window, Open Main Class Window. Think how to do it in generic way. Probably have to move ChooseLevelWindow to separate class.
+        throw new NotImplementedException();
+    }
+
+    @FXML
+    public void onSaveStateButtonClicked() {
+        Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getInstance().getFileDao(ApplicationSettings.getInstance().SAVE_FILE_PATH);
+        dao.write(this.game.getSudokuBoard());
     }
 }
