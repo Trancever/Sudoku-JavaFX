@@ -10,8 +10,10 @@ import java.io.Serializable;
 
 public class SudokuBoard implements Serializable, Cloneable {
 
-    private ArrayList<ArrayList<SudokuField>> field;
+    private final static int ROWS = 9;
+    private final static int COLUMNS = 9;
 
+    private ArrayList<ArrayList<SudokuField>> field;
 
     public SudokuBoard() {
         field = new ArrayList<ArrayList<SudokuField>>();
@@ -19,17 +21,18 @@ public class SudokuBoard implements Serializable, Cloneable {
     }
 
     private void initBoard() {
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < ROWS; i++) {
             field.add(new ArrayList<SudokuField>());
-            for (int j = 0; j < 9; j++) {
+            for (int j = 0; j < COLUMNS; j++) {
                 field.get(i).add(new SudokuField());
             }
         }
         int[] tmp = new int[3];
+        Random random = new Random();
         do {
-            tmp[0] = generateNumber(1, 9);
-            tmp[1] = generateNumber(1, 9);
-            tmp[2] = generateNumber(1, 9);
+            tmp[0] = random.nextInt(ROWS);
+            tmp[1] = random.nextInt(ROWS);
+            tmp[2] = random.nextInt(ROWS);
         } while ((tmp[0] == tmp[1]) || (tmp[1] == tmp[2]) || (tmp[0] == tmp[2]));
         for (int i = 0; i < 3; i++) {
             field.get(0).get(i).setValue(tmp[i]);
@@ -58,16 +61,12 @@ public class SudokuBoard implements Serializable, Cloneable {
         this.field.get(row).get(col).setValue(value);
     }
 
-    private int generateNumber(final int lowest, final int highest) {
-        return lowest + (int) (Math.random() * highest);
-    }
-
     public SudokuRow getRow(final int row) throws IndexOutOfBoundsException {
         if (row < 0 || row > 8) {
             throw new IndexOutOfBoundsException("Wrong row. Given = " + row + " expected from 0 to 8.");
         }
         ArrayList<SudokuField> tmp = new ArrayList<SudokuField>();
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < COLUMNS; i++) {
             tmp.add(new SudokuField());
             tmp.get(i).setValue(field.get(row).get(i).getValue());
         }
@@ -79,7 +78,7 @@ public class SudokuBoard implements Serializable, Cloneable {
             throw new IndexOutOfBoundsException("Wrong column. Given = " + column + " expected from 0 to 8.");
         }
         ArrayList<SudokuField> tmp = new ArrayList<SudokuField>();
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < ROWS; i++) {
             tmp.add(new SudokuField());
             tmp.get(i).setValue(field.get(i).get(column).getValue());
         }
@@ -105,8 +104,8 @@ public class SudokuBoard implements Serializable, Cloneable {
     public void cleanRandomlyFields(int amount) {
         Random random = new Random();
         while(amount > 0) {
-            int row = random.nextInt(9);
-            int col = random.nextInt(9);
+            int row = random.nextInt(ROWS);
+            int col = random.nextInt(COLUMNS);
             if (this.getValue(row, col) != 0) {
                 this.setValue(row, col, 0);
                 amount--;
@@ -117,9 +116,9 @@ public class SudokuBoard implements Serializable, Cloneable {
     @Override
     protected Object clone() throws CloneNotSupportedException {
         ArrayList<ArrayList<SudokuField>> newList = new ArrayList<ArrayList<SudokuField>>();
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < ROWS; i++) {
             newList.add(new ArrayList<SudokuField>());
-            for (int j = 0; j < 9; j++) {
+            for (int j = 0; j < COLUMNS; j++) {
                 newList.get(i).add((SudokuField) field.get(i).get(j).clone());
             }
         }
@@ -147,8 +146,8 @@ public class SudokuBoard implements Serializable, Cloneable {
         }
         final SudokuBoard other = (SudokuBoard) obj;
         final ArrayList<ArrayList<SudokuField>> list = other.getAll();
-        for (int i = 0; i < field.size(); i++) {
-            for (int j = 0; j < field.get(i).size(); j++) {
+        for (int i = 0; i < ROWS; i++) {
+            for (int j = 0; j < COLUMNS; j++) {
                 if (field.get(i).get(j).getValue() != list.get(i).get(j).getValue()) {
                     return false;
                 }
