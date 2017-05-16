@@ -12,6 +12,7 @@ import javafx.scene.control.RadioButton;
 import javafx.stage.Stage;
 import game.ApplicationSettings;
 import sample.MainSudokuWindow;
+import sample.WindowManager;
 import sudokupack.BackTrackingSudokuSolver;
 
 import java.io.IOException;
@@ -71,7 +72,8 @@ public class ChooseLevelWindowController {
             e.printStackTrace();
         }
         Stage stage = (Stage) exitButton.getScene().getWindow();
-        stage.close();
+        WindowManager.getInstance().setPrimaryStage(stage);
+        stage.hide();
     }
 
     @FXML

@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import sample.CustomWidgets.FieldPane;
 import sample.CustomWidgets.NumberButton;
 import sample.Main;
+import sample.WindowManager;
 import sudokupack.Dao;
 import sudokupack.SudokuBoard;
 import sudokupack.SudokuBoardDaoFactory;
@@ -147,8 +148,9 @@ public class MainSudokuWindowController {
 
     @FXML
     public void onNewGameButtonClicked() {
-        //TODO: Close this window, Open Main Class Window. Think how to do it in generic way. Probably have to move ChooseLevelWindow to separate class.
-        throw new NotImplementedException();
+        Stage stage = (Stage) this.sudokuGrid.getScene().getWindow();
+        stage.close();
+        WindowManager.getInstance().getPrimaryStage().show();
     }
 
     @FXML
