@@ -3,6 +3,9 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,58 +16,83 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.text.Font?>
-<GridPane alignment="center" hgap="10" maxHeight="670.0" maxWidth="450.0" minHeight="670.0" minWidth="450.0" prefHeight="670.0" prefWidth="450.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.ChooseLevelWindowController">
-   <columnConstraints>
-      <ColumnConstraints />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints />
-   </rowConstraints>
-   <children>
-      <AnchorPane maxHeight="670.0" maxWidth="450.0" minHeight="670.0" minWidth="450.0" prefHeight="670.0" prefWidth="450.0" styleClass="main-content" stylesheets="@../css/main.css" GridPane.halignment="CENTER" GridPane.valignment="TOP">
-         <children>
-            <VBox alignment="TOP_CENTER" layoutX="125.0" layoutY="163.0" prefHeight="600.0" prefWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <Label styleClass="start-game-label" text="%game"/>
-                  <Button fx:id="easyButton" mnemonicParsing="false" onAction="#onEasyButtonClick" styleClass="level-button" text="%easyButton">
-                     <VBox.margin>
-                        <Insets bottom="18.0" top="180.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Button fx:id="mediumButton" mnemonicParsing="false" onAction="#onMediumButtonClick" styleClass="level-button" text="%mediumButton">
-                     <VBox.margin>
-                        <Insets bottom="18.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Button fx:id="hardButton" mnemonicParsing="false" onAction="#onHardButtonClick" styleClass="level-button" text="%hardButton">
-                     <VBox.margin>
-                        <Insets bottom="18.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Button fx:id="exitButton" mnemonicParsing="false" onAction="#onExitButtonClick" styleClass="level-button" text="%exitButton">
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                  </Button>
-                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="nationalization-hbox">
-                     <children>
-                        <RadioButton fx:id="polishRadioButton" mnemonicParsing="false" onAction="#onRadioToggleGroupToggled" styleClass="nationalization-radio-button">
-                           <graphic>
-                              <Pane prefHeight="30.0" prefWidth="40.0" styleClass="polish-flag" />
-                           </graphic>
-                           <toggleGroup>
-                              <ToggleGroup fx:id="group" />
-                           </toggleGroup>
-                        </RadioButton>
-                        <RadioButton fx:id="usRadioButton" mnemonicParsing="false" onAction="#onRadioToggleGroupToggled" styleClass="nationalization-radio-button" toggleGroup="$group">
-                           <graphic>
-                              <Pane prefHeight="30.0" prefWidth="40.0" styleClass="us-flag" />
-                           </graphic>
-                        </RadioButton>
-                     </children>
-                  </HBox>
-               </children></VBox>
-         </children></AnchorPane>
-   </children>
+<GridPane alignment="center" hgap="10" maxHeight="670.0" maxWidth="450.0" minHeight="670.0" minWidth="450.0"
+          prefHeight="670.0" prefWidth="450.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.111"
+          xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.ChooseLevelWindowController">
+    <columnConstraints>
+        <ColumnConstraints/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints/>
+    </rowConstraints>
+    <children>
+        <AnchorPane maxHeight="670.0" maxWidth="450.0" minHeight="670.0" minWidth="450.0" prefHeight="670.0"
+                    prefWidth="450.0" styleClass="main-content" stylesheets="@../css/main.css"
+                    GridPane.halignment="CENTER" GridPane.valignment="TOP">
+            <children>
+                <VBox alignment="TOP_CENTER" layoutX="125.0" layoutY="163.0" prefHeight="600.0" prefWidth="450.0"
+                      AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                      AnchorPane.topAnchor="0.0">
+                    <children>
+                        <MenuBar>
+                            <menus>
+                                <Menu mnemonicParsing="false" text="File">
+                                    <items>
+                                        <MenuItem onAction="#onLoadGameButtonClicked" fx:id="loadItem" mnemonicParsing="false" text="Load previous game"/>
+                                        <MenuItem onAction="#onCloseButtonClicked" fx:id="closeItem" mnemonicParsing="false" text="Close"/>
+                                    </items>
+                                </Menu>
+                            </menus>
+                        </MenuBar>
+                        <Label styleClass="start-game-label" text="%game"/>
+                        <Button fx:id="easyButton" mnemonicParsing="false" onAction="#onEasyButtonClick"
+                                styleClass="level-button" text="%easyButton">
+                            <VBox.margin>
+                                <Insets bottom="18.0" top="155.0"/>
+                            </VBox.margin>
+                        </Button>
+                        <Button fx:id="mediumButton" mnemonicParsing="false" onAction="#onMediumButtonClick"
+                                styleClass="level-button" text="%mediumButton">
+                            <VBox.margin>
+                                <Insets bottom="18.0"/>
+                            </VBox.margin>
+                        </Button>
+                        <Button fx:id="hardButton" mnemonicParsing="false" onAction="#onHardButtonClick"
+                                styleClass="level-button" text="%hardButton">
+                            <VBox.margin>
+                                <Insets bottom="18.0"/>
+                            </VBox.margin>
+                        </Button>
+                        <Button fx:id="exitButton" mnemonicParsing="false" onAction="#onExitButtonClick"
+                                styleClass="level-button" text="%exitButton">
+                            <VBox.margin>
+                                <Insets/>
+                            </VBox.margin>
+                        </Button>
+                        <HBox prefHeight="100.0" prefWidth="200.0" styleClass="nationalization-hbox">
+                            <children>
+                                <RadioButton fx:id="polishRadioButton" mnemonicParsing="false"
+                                             onAction="#onRadioToggleGroupToggled"
+                                             styleClass="nationalization-radio-button">
+                                    <graphic>
+                                        <Pane prefHeight="30.0" prefWidth="40.0" styleClass="polish-flag"/>
+                                    </graphic>
+                                    <toggleGroup>
+                                        <ToggleGroup fx:id="group"/>
+                                    </toggleGroup>
+                                </RadioButton>
+                                <RadioButton fx:id="usRadioButton" mnemonicParsing="false"
+                                             onAction="#onRadioToggleGroupToggled"
+                                             styleClass="nationalization-radio-button" toggleGroup="$group">
+                                    <graphic>
+                                        <Pane prefHeight="30.0" prefWidth="40.0" styleClass="us-flag"/>
+                                    </graphic>
+                                </RadioButton>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+    </children>
 </GridPane>

@@ -11,7 +11,7 @@ public class ApplicationSettings {
 
     private Game game;
 
-    public final static String SAVE_FILE_PATH = "d:/saved.xD";
+    public static final String SAVE_FILE_PATH = "d:/saved.xD";
 
     public Game getGame() {
         return game;

@@ -10,8 +10,8 @@ import java.io.Serializable;
 
 public class SudokuBoard implements Serializable, Cloneable {
 
-    private final static int ROWS = 9;
-    private final static int COLUMNS = 9;
+    private static final int ROWS = 9;
+    private static final int COLUMNS = 9;
 
     private ArrayList<ArrayList<SudokuField>> field;
 
@@ -101,14 +101,15 @@ public class SudokuBoard implements Serializable, Cloneable {
         return new SudokuBox(tmp);
     }
 
-    public void cleanRandomlyFields(int amount) {
+    public void cleanRandomlyFields(final int amount) {
         Random random = new Random();
-        while (amount > 0) {
+        int tmp = amount;
+        while (tmp > 0) {
             int row = random.nextInt(ROWS);
             int col = random.nextInt(COLUMNS);
             if (this.getValue(row, col) != 0) {
                 this.setValue(row, col, 0);
-                amount--;
+                tmp--;
             }
         }
     }

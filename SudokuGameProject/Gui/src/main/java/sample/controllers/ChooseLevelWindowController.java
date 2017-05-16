@@ -8,12 +8,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.stage.Stage;
 import game.ApplicationSettings;
 import sample.MainSudokuWindow;
 import sample.WindowManager;
 import sudokupack.BackTrackingSudokuSolver;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -38,6 +40,12 @@ public class ChooseLevelWindowController {
 
     @FXML
     private RadioButton usRadioButton;
+
+    @FXML
+    private MenuItem loadItem;
+
+    @FXML
+    private MenuItem closeItem;
 
     @FXML
     public void onEasyButtonClick() {
@@ -78,8 +86,7 @@ public class ChooseLevelWindowController {
 
     @FXML
     public void onExitButtonClick() {
-        Stage stage = (Stage) exitButton.getScene().getWindow();
-        stage.close();
+        this.closeApp();
     }
 
     @FXML
@@ -96,5 +103,20 @@ public class ChooseLevelWindowController {
                 ResourceBundle.getBundle("MyBundle", locale));
         scene.setRoot(root);
         ApplicationSettings.getInstance().setCurrentLocale(locale);
+    }
+
+    @FXML
+    public void onCloseButtonClicked() {
+        this.closeApp();
+    }
+
+    private void closeApp() {
+        Stage stage = (Stage) exitButton.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    public void onLoadGameButtonClicked() {
+        throw new NotImplementedException();
     }
 }
