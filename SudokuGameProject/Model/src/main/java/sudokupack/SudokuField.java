@@ -7,33 +7,33 @@ import java.io.Serializable;
 
 public class SudokuField implements Serializable, Cloneable, Comparable {
 
-    private Integer field;
+    private Integer value;
 
     public SudokuField() {
-        field = new Integer(0);
+        value = new Integer(0);
     }
     public SudokuField(final int value) {
-        field = value;
+        this.value = value;
     }
 
     public int getValue() {
-        int value = field.intValue();
+        int value = this.value.intValue();
         return value;
     }
 
     public void setValue(final int value) {
-        field = new Integer(value);
+        this.value = new Integer(value);
     }
 
     @Override
     protected Object clone() throws CloneNotSupportedException {
-        Integer value = new Integer(this.field.intValue());
+        Integer value = new Integer(this.value.intValue());
         return new SudokuField(value);
     }
 
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this.getClass()).add("field", field).
+        return MoreObjects.toStringHelper(this.getClass()).add("value", value).
                 toString();
     }
     
@@ -54,7 +54,7 @@ public class SudokuField implements Serializable, Cloneable, Comparable {
     
     @Override
     public int hashCode() {
-        return Objects.hashCode(this.field);
+        return Objects.hashCode(this.value);
     }
 
     public int compareTo(final Object obj) {
@@ -66,13 +66,13 @@ public class SudokuField implements Serializable, Cloneable, Comparable {
             return EQUAL;
         }
         SudokuField other = (SudokuField) obj;
-        if (this.field.intValue() < other.field.intValue()) {
+        if (this.value.intValue() < other.value.intValue()) {
             return BEFORE;
-        } else if (this.field.intValue() > other.field.intValue()) {
+        } else if (this.value.intValue() > other.value.intValue()) {
             return AFTER;
         }
 
-        assert this.equals(other) : "SudokuField compareTo do not match with equals method";
+        assert this.equals(other) : "Sudokuvalue compareTo do not match with equals method";
         return EQUAL;
     }
 }

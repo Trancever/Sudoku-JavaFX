@@ -12,6 +12,10 @@ public class FieldPane extends Pane {
     private Label label;
     private boolean isChangeable;
 
+    public Label getLabel() {
+        return this.label;
+    }
+
     public int getX() {
         return x;
     }

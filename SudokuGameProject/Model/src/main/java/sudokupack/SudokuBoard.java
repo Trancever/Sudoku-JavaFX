@@ -53,6 +53,10 @@ public class SudokuBoard implements Serializable, Cloneable {
         return value;
     }
 
+    public SudokuField getField(final int row, final int col) {
+        return this.field.get(row).get(col);
+    }
+
     public void setValue(final int row, final int col, final int value) throws IndexOutOfBoundsException {
         if (col < 0 || col > 8 || row < 0 || row > 8) {
             throw new IndexOutOfBoundsException("Wrong parameters of setValue. Given row = " + row
@@ -179,6 +183,17 @@ public class SudokuBoard implements Serializable, Cloneable {
     @Override
     public int hashCode() {
         return Objects.hashCode(this.field);
+    }
+
+    public String print() {
+        StringBuilder builder = new StringBuilder();
+        for (List<SudokuField> x : field) {
+            for (SudokuField y : x) {
+                builder.append(Integer.toString(y.getValue()) + " ");
+            }
+            builder.append("\n");
+        }
+        return builder.toString();
     }
 
 }

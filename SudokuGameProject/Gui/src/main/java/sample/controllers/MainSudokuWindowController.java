@@ -1,6 +1,9 @@
 package sample.controllers;
 
 import game.Game;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.adapter.JavaBeanIntegerProperty;
+import javafx.beans.property.adapter.JavaBeanIntegerPropertyBuilder;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -10,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import game.ApplicationSettings;
 import javafx.stage.Stage;
+import javafx.util.converter.NumberStringConverter;
 import sample.CustomWidgets.FieldPane;
 import sample.CustomWidgets.NumberButton;
 import sample.WindowManager;
@@ -71,7 +75,6 @@ public class MainSudokuWindowController {
                     } else {
                         currentSelectedField.setLabelText(button.getText());
                     }
-                    game.getSudokuBoard().setValue(currentSelectedField.getX(), currentSelectedField.getY(), button.getNumber());
                     if (game.getSudokuBoard().isSolved()) {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("You won");
@@ -93,15 +96,29 @@ public class MainSudokuWindowController {
                 sudokuGrid.getChildren().add(grid);
                 for (int w = 0; w < 3; w++) {
                     for (int z = 0; z < 3; z++) {
-                        FieldPane pane = new FieldPane(x * 3 + w, y * 3 + z,
-                                Integer.toString(this.game.getSudokuBoard().getValue(x * 3 + w, y * 3 + z)));
+                        int computedX = x * 3 + w;
+                        int computedY =  y * 3 + z;
+                        FieldPane pane = new FieldPane(computedX, computedY,
+                                Integer.toString(this.game.getSudokuBoard().getValue(computedX, computedY)));
                         this.addSudokuFieldEvent(pane);
                         GridPane.setConstraints(pane, z, w);
                         grid.getChildren().add(pane);
+                        try {
+                            Bindings.bindBidirectional(pane.getLabel().textProperty(),
+                                    JavaBeanIntegerPropertyBuilder.create().bean(this.game.getSudokuBoard().
+                                            getField(computedX, computedY)).name("value").build(),
+                                    new NumberStringConverter());
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            System.out.println("Exception while binding label text property with model SudokuField value.");
+                        }
                     }
                 }
             }
         }
+        this.onResetGameButtonClicked(); // TODO: Tu jest niezły szit odwalony, pasuje to jakoś lepiej napisać xD
+                                         // TODO: Pola są resetowane bo ten NumberStringConverter zamienia nam 0 z modelu
+                                         // TODO: na 0 na widoku :( w trakcie bindowania...
     }
 
     private void addSudokuFieldEvent(final FieldPane pane) {
