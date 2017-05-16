@@ -6,19 +6,16 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import game.ApplicationSettings;
 import javafx.stage.Stage;
 import sample.CustomWidgets.FieldPane;
 import sample.CustomWidgets.NumberButton;
-import sample.Main;
 import sample.WindowManager;
 import sudokupack.Dao;
 import sudokupack.SudokuBoard;
 import sudokupack.SudokuBoardDaoFactory;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 
 public class MainSudokuWindowController {

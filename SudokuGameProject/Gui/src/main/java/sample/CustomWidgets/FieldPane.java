@@ -5,9 +5,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 
 
-/**
- * Created by Trensik on 5/12/2017.
- */
 public class FieldPane extends Pane {
 
     private int x;

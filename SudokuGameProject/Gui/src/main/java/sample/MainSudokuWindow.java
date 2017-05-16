@@ -6,14 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import sample.controllers.MainSudokuWindowController;
-
-import java.util.Locale;
 import java.util.ResourceBundle;
 
-/**
- * Created by Trensik on 4/28/2017.
- */
 public class MainSudokuWindow {
 
     private Stage stage;

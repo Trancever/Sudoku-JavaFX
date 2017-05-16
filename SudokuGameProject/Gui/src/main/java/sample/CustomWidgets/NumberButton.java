@@ -6,9 +6,6 @@ import javafx.scene.text.Font;
 
 import java.util.ResourceBundle;
 
-/**
- * Created by Trensik on 5/12/2017.
- */
 public class NumberButton extends Button {
 
     public int number;

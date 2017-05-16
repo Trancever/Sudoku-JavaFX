@@ -2,9 +2,6 @@ package sample;
 
 import javafx.stage.Stage;
 
-/**
- * Created by Trensik on 5/16/2017.
- */
 public class WindowManager {
 
     private Stage primaryStage;
