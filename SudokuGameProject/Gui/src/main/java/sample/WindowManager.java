@@ -12,7 +12,6 @@ public class WindowManager {
 
     public Stage getPrimaryStage() {
         return primaryStage;
-
     }
 
     private static WindowManager manager = new WindowManager();

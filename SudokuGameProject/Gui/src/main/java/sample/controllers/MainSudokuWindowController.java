@@ -75,7 +75,8 @@ public class MainSudokuWindowController {
                     if (game.getSudokuBoard().isSolved()) {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("You won");
-                        alert.setHeaderText("Sudoku solved, congratulation");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Sudoku solved, congratulation");
                         alert.showAndWait();
                     }
                 }
@@ -154,5 +155,10 @@ public class MainSudokuWindowController {
     public void onSaveStateButtonClicked() {
         Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getInstance().getFileDao(ApplicationSettings.getInstance().SAVE_FILE_PATH);
         dao.write(this.game.getSudokuBoard());
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Game saved");
+        alert.setContentText("Your game has been successfully saved.");
+        alert.setHeaderText(null);
+        alert.showAndWait();
     }
 }
