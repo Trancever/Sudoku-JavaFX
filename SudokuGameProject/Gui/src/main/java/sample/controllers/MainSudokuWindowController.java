@@ -13,10 +13,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import game.ApplicationSettings;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 import javafx.util.converter.NumberStringConverter;
 import sample.CustomWidgets.FieldPane;
 import sample.CustomWidgets.NumberButton;
 import sample.WindowManager;
+import sample.helpers.CustomConverter;
 import sudokupack.Dao;
 import sudokupack.SudokuBoard;
 import sudokupack.SudokuBoardDaoFactory;
@@ -106,8 +108,7 @@ public class MainSudokuWindowController {
                         try {
                             Bindings.bindBidirectional(pane.getLabel().textProperty(),
                                     JavaBeanIntegerPropertyBuilder.create().bean(this.game.getSudokuBoard().
-                                            getField(computedX, computedY)).name("value").build(),
-                                    new NumberStringConverter());
+                                            getField(computedX, computedY)).name("value").build(), new CustomConverter());
                         } catch (Exception e) {
                             e.printStackTrace();
                             System.out.println("Exception while binding label text property with model SudokuField value.");
@@ -116,9 +117,6 @@ public class MainSudokuWindowController {
                 }
             }
         }
-        this.onResetGameButtonClicked(); // TODO: Tu jest niezły szit odwalony, pasuje to jakoś lepiej napisać xD
-                                         // TODO: Pola są resetowane bo ten NumberStringConverter zamienia nam 0 z modelu
-                                         // TODO: na 0 na widoku :( w trakcie bindowania...
     }
 
     private void addSudokuFieldEvent(final FieldPane pane) {
