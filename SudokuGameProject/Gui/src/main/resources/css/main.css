@@ -24,11 +24,9 @@
     -fx-max-height: 50;
     -fx-font-size: 15px;
     -fx-font-weight: 500;
-    /*-fx-background-color: linear-gradient(#f0ff35, #a9ff00);*/
     -fx-background-color: #DDD;
     -fx-background-radius: 6, 5;
     -fx-background-insets: 0, 1;
-    /*-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 5, 0.0, 0, 1);*/
     -fx-text-fill: black;
     -fx-border-color: #888;
     -fx-border-radius: 3px;
@@ -61,11 +59,9 @@
 .insert-number-button {
     -fx-min-width: 45;
     -fx-min-height: 45;
-    /*-fx-background-color: linear-gradient(#f0ff35, #a9ff00);*/
     -fx-background-color: #DDD;
     -fx-background-radius: 6, 5;
     -fx-background-insets: 0, 1;
-    /*-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 5, 0.0, 0, 1);*/
     -fx-border-color: #888;
     -fx-border-radius: 3px;
     -fx-text-fill: black;
