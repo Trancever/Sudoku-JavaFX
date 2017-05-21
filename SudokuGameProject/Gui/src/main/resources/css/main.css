@@ -56,6 +56,12 @@
     -fx-background-image: url("images/background.png");
 }
 
+.main-content-board {
+    -fx-background-image: url("images/background_sudoku.jpg");
+    -fx-background-position: center;
+    -fx-background-size: auto;
+}
+
 .insert-number-button {
     -fx-min-width: 45;
     -fx-min-height: 45;
