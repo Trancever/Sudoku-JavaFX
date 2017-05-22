@@ -152,7 +152,6 @@ public class MainSudokuWindowController {
             for (Node field : innerGrid.getChildren()) {
                 FieldPane pane = (FieldPane) field;
                 if (pane.isChangeable()) {
-                    this.game.getSudokuBoard().setValue(pane.getX(), pane.getX(), 0);
                     pane.setLabelText("0");
                 }
             }
