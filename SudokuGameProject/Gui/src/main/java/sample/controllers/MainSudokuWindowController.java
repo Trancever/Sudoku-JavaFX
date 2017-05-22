@@ -15,6 +15,8 @@ import game.ApplicationSettings;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import javafx.util.converter.NumberStringConverter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import sample.CustomWidgets.FieldPane;
 import sample.CustomWidgets.NumberButton;
 import sample.WindowManager;
@@ -25,6 +27,8 @@ import sudokupack.SudokuBoardDaoFactory;
 
 
 public class MainSudokuWindowController {
+
+    final static Logger logger = LoggerFactory.getLogger(MainSudokuWindowController.class);
 
     private Game game;
 
@@ -64,6 +68,7 @@ public class MainSudokuWindowController {
             }
             this.addButtonEvent(button);
         }
+        logger.info("Siemanko.jpeg");
     }
 
     private void addButtonEvent(final NumberButton button) {
