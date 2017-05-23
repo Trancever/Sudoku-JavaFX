@@ -5,10 +5,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ResourceBundle;
 
 public class MainSudokuWindow {
+
+    Logger logger = LoggerFactory.getLogger(MainSudokuWindow.class);
 
     private Stage stage;
     private Scene scene;
@@ -24,5 +28,6 @@ public class MainSudokuWindow {
         this.stage.getIcons().add(new Image("images/sudoku.png"));
         this.stage.setResizable(false);
         this.stage.show();
+        logger.debug("MainSudokuWindow started");
     }
 }

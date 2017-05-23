@@ -6,9 +6,13 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class SplashScreenLoader extends Preloader {
+
+    Logger logger = LoggerFactory.getLogger(SplashScreenLoader.class);
 
     private Stage splashScreen;
 
@@ -18,6 +22,7 @@ public class SplashScreenLoader extends Preloader {
         splashScreen.initStyle(StageStyle.TRANSPARENT);
         splashScreen.setScene(createScene());
         splashScreen.show();
+        logger.debug("SplashScreenLoader started.");
     }
 
     public Scene createScene() {
