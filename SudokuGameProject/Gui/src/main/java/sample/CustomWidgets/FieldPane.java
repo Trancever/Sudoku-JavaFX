@@ -28,7 +28,7 @@ public class FieldPane extends Pane {
         return isChangeable;
     }
 
-    public FieldPane(final int x, final int y, String text) {
+    public FieldPane(final int x, final int y, String text, boolean isChangeable) {
         super();
         this.x = x;
         this.y = y;
@@ -37,12 +37,7 @@ public class FieldPane extends Pane {
         this.label.layoutXProperty().bind(this.widthProperty().subtract(this.label.widthProperty()).divide(2));
         this.label.layoutYProperty().bind(this.heightProperty().subtract(this.label.heightProperty()).divide(2));
         this.label.setFont(new Font("Arial", 48));
-        if (text.equals("0")) {
-            isChangeable = true;
-            text = "";
-        } else {
-            isChangeable = false;
-        }
+        this.isChangeable = isChangeable;
         this.setLabelText(text);
         this.setStyle();
 

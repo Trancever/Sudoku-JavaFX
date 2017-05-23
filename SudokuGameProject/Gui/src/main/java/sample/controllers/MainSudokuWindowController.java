@@ -53,7 +53,9 @@ public class MainSudokuWindowController {
     public void initialize() {
         this.currentSelectedField = null;
         this.game = WindowManager.getInstance().getGame();
-        this.game.cleanFields();
+        if (!game.isLoaded()) {
+            this.game.cleanFields();
+        }
         this.initializeSudokuGrid();
         this.initializeButtons();
     }
@@ -105,8 +107,16 @@ public class MainSudokuWindowController {
                     for (int z = 0; z < 3; z++) {
                         int computedX = x * 3 + w;
                         int computedY =  y * 3 + z;
-                        FieldPane pane = new FieldPane(computedX, computedY,
-                                Integer.toString(this.game.getSudokuBoard().getValue(computedX, computedY)));
+                        FieldPane pane;
+                        if (this.game.isLoaded()) {
+                            pane = createFieldPane(computedX, computedY,this.game.getHelperValue(computedX, computedY));
+                        } else {
+                            if (this.game.getSudokuBoard().getValue(computedX, computedY) == 0) {
+                                pane = createFieldPane(computedX, computedY, true);
+                            } else {
+                                pane = createFieldPane(computedX, computedY, false);
+                            }
+                        }
                         this.addSudokuFieldEvent(pane);
                         GridPane.setConstraints(pane, z, w);
                         grid.getChildren().add(pane);
@@ -122,6 +132,10 @@ public class MainSudokuWindowController {
                 }
             }
         }
+    }
+
+    private FieldPane createFieldPane(final int x, final int y, final boolean changeable) {
+        return new FieldPane(x, y, Integer.toString(this.game.getSudokuBoard().getValue(x, y)), changeable);
     }
 
     private void addSudokuFieldEvent(final FieldPane pane) {
