@@ -58,6 +58,7 @@ public class MainSudokuWindowController {
         }
         this.initializeSudokuGrid();
         this.initializeButtons();
+        logger.debug("MainSudokuWindowController initialized.");
     }
 
     private void initializeButtons() {
@@ -70,14 +71,13 @@ public class MainSudokuWindowController {
             }
             this.addButtonEvent(button);
         }
-        logger.info("Siemanko.jpeg");
     }
 
     private void addButtonEvent(final NumberButton button) {
         button.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 NumberButton button = (NumberButton) event.getSource();
-                System.out.println(button.toString() + " clicked. Number = " + button.getNumber());
+                logger.debug(button.toString() + " clicked. Number = " + button.getNumber());
                 if (currentSelectedField != null) {
                     if (button.getNumber() == 0) {
                         currentSelectedField.setLabelText("");
@@ -126,7 +126,7 @@ public class MainSudokuWindowController {
                                             getField(computedX, computedY)).name("value").build(), new CustomConverter());
                         } catch (Exception e) {
                             e.printStackTrace();
-                            System.out.println("Exception while binding label text property with model SudokuField value.");
+                            logger.error("Exception: Cannot bind label text property with model SudokuField value.");
                         }
                     }
                 }
@@ -151,7 +151,7 @@ public class MainSudokuWindowController {
                             }
                         }
                     }
-                    System.out.println(pane.toString() + " clicked. Position " + pane.getX() + " " + pane.getY());
+                    logger.debug(pane.toString() + " clicked. Position " + pane.getX() + " " + pane.getY());
                     if (currentSelectedField != null && currentSelectedField.equals(pane)) {
                         pane.getStyleClass().remove("sudokuFieldSelected");
                         currentSelectedField = null;

@@ -7,6 +7,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -14,10 +16,13 @@ import java.util.concurrent.TimeUnit;
 
 public class Main extends Application {
 
+    Logger logger = LoggerFactory.getLogger(Main.class);
+
     @Override
     public void init() throws Exception {
         //Wait 2 seconds for splash screen.
         TimeUnit.SECONDS.sleep(2);
+
     }
 
     @Override
@@ -31,6 +36,7 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
         primaryStage.show();
+        logger.debug("App started");
     }
 
 

@@ -13,6 +13,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import sample.MainSudokuWindow;
 import sample.WindowManager;
 import sudokupack.BackTrackingSudokuSolver;
@@ -28,6 +30,8 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class ChooseLevelWindowController {
+
+    Logger logger = LoggerFactory.getLogger(ChooseLevelWindowController.class);
 
     @FXML
     private Button easyButton;
@@ -75,6 +79,7 @@ public class ChooseLevelWindowController {
         } else {
             polishRadioButton.setSelected(true);
         }
+        logger.debug("ChooseLevelWindowController initialized");
     }
 
     private void runGame(GameLevel level, SudokuBoard sudokuBoard, boolean isLoaded, List<List<Boolean>> helperList) {
@@ -143,6 +148,7 @@ public class ChooseLevelWindowController {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            logger.error("Exception: Save game cannot be imported.");
             //TODO: okienko informujace ze sie nie udalo wczytac gry
         }
         this.runGame(GameLevel.EASY, board, true, tmp);
