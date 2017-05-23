@@ -1,7 +1,6 @@
 package sample;
 
 import com.sun.javafx.application.LauncherImpl;
-import game.ApplicationSettings;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,7 +23,7 @@ public class Main extends Application {
     @Override
     public void start(final Stage primaryStage) throws Exception {
         Locale locale = new Locale("pl", "PL");
-        ApplicationSettings.getInstance().setCurrentLocale(locale);
+        WindowManager.getInstance().setCurrentLocale(locale);
         ResourceBundle bundle = ResourceBundle.getBundle("MyBundle", locale);
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/ChooseLevelWindow.fxml"), bundle);
         primaryStage.setTitle("Sudoku Game");

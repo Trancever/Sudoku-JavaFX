@@ -11,10 +11,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.stage.Stage;
-import game.ApplicationSettings;
 import sample.MainSudokuWindow;
 import sample.WindowManager;
 import sudokupack.BackTrackingSudokuSolver;
+import sudokupack.Dao;
+import sudokupack.SudokuBoard;
+import sudokupack.SudokuBoardDaoFactory;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.IOException;
@@ -49,17 +51,17 @@ public class ChooseLevelWindowController {
 
     @FXML
     public void onEasyButtonClick() {
-        this.runGame(GameLevel.EASY);
+        this.runGame(GameLevel.EASY, new SudokuBoard(), false);
     }
 
     @FXML
     public void onMediumButtonClick() {
-        this.runGame(GameLevel.MEDIUM);
+        this.runGame(GameLevel.MEDIUM, new SudokuBoard(), false);
     }
 
     @FXML
     public void onHardButtonClick() {
-        this.runGame(GameLevel.HARD);
+        this.runGame(GameLevel.HARD, new SudokuBoard(), false);
     }
 
     @FXML
@@ -71,10 +73,10 @@ public class ChooseLevelWindowController {
         }
     }
 
-    private void runGame(GameLevel level) {
+    private void runGame(GameLevel level, SudokuBoard sudokuBoard, boolean isLoaded) {
         MainSudokuWindow window = new MainSudokuWindow();
         try {
-            ApplicationSettings.getInstance().setGame(new Game(level, new BackTrackingSudokuSolver()));
+            WindowManager.getInstance().setGame(new Game(level, sudokuBoard, isLoaded));
             window.start();
         } catch (Exception e) {
             e.printStackTrace();
@@ -102,7 +104,7 @@ public class ChooseLevelWindowController {
         Parent root = (Parent) FXMLLoader.load(getClass().getClassLoader().getResource("fxml/ChooseLevelWindow.fxml"),
                 ResourceBundle.getBundle("MyBundle", locale));
         scene.setRoot(root);
-        ApplicationSettings.getInstance().setCurrentLocale(locale);
+        WindowManager.getInstance().setCurrentLocale(locale);
     }
 
     @FXML
@@ -117,6 +119,8 @@ public class ChooseLevelWindowController {
 
     @FXML
     public void onLoadGameButtonClicked() {
-        throw new NotImplementedException();
+        Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getInstance().getFileDao(WindowManager.SAVE_FILE_PATH);
+        SudokuBoard board = dao.read();
+        this.runGame(GameLevel.EASY, board, true);
     }
 }

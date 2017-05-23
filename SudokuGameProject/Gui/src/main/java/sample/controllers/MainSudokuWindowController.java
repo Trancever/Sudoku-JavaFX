@@ -1,8 +1,9 @@
 package sample.controllers;
 
+import com.google.common.io.Files;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import game.Game;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.adapter.JavaBeanIntegerProperty;
 import javafx.beans.property.adapter.JavaBeanIntegerPropertyBuilder;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -11,10 +12,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import game.ApplicationSettings;
 import javafx.stage.Stage;
-import javafx.util.StringConverter;
-import javafx.util.converter.NumberStringConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sample.CustomWidgets.FieldPane;
@@ -24,6 +22,8 @@ import sample.helpers.CustomConverter;
 import sudokupack.Dao;
 import sudokupack.SudokuBoard;
 import sudokupack.SudokuBoardDaoFactory;
+
+import java.io.*;
 
 
 public class MainSudokuWindowController {
@@ -52,7 +52,7 @@ public class MainSudokuWindowController {
     @FXML
     public void initialize() {
         this.currentSelectedField = null;
-        this.game = ApplicationSettings.getInstance().getGame();
+        this.game = WindowManager.getInstance().getGame();
         this.game.cleanFields();
         this.initializeSudokuGrid();
         this.initializeButtons();
@@ -172,12 +172,34 @@ public class MainSudokuWindowController {
 
     @FXML
     public void onSaveStateButtonClicked() {
-        Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getInstance().getFileDao(ApplicationSettings.getInstance().SAVE_FILE_PATH);
+        Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getInstance().getFileDao(WindowManager.getInstance().SAVE_FILE_PATH);
         dao.write(this.game.getSudokuBoard());
+        try {
+            BufferedWriter out = new BufferedWriter(new FileWriter(WindowManager.SAVE_HELPER_FILE_PATH));
+            out.write(generateFieldsProperties());
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Game saved");
         alert.setContentText("Your game has been successfully saved.");
         alert.setHeaderText(null);
         alert.showAndWait();
+    }
+
+    private String generateFieldsProperties() {
+        StringBuilder str = new StringBuilder();
+        for (Node node : sudokuGrid.getChildren()) {
+            GridPane innerGrid = (GridPane) node;
+            for (Node field : innerGrid.getChildren()) {
+                FieldPane pane = (FieldPane) field;
+                str.append(Integer.toString(pane.getX()) + ",");
+                str.append(Integer.toString(pane.getY()) + ",");
+                str.append(Boolean.toString(pane.isChangeable()) + "\n");
+            }
+        }
+        return str.toString();
     }
 }
