@@ -8,7 +8,7 @@ import javafx.util.StringConverter;
 public class CustomConverter extends StringConverter<Number> {
 
     @Override
-    public String toString(Number object) {
+    public String toString(final Number object) {
         if (object.intValue() == 0) {
             return "";
         } else {

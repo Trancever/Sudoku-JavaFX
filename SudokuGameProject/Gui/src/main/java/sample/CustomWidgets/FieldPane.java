@@ -28,7 +28,7 @@ public class FieldPane extends Pane {
         return isChangeable;
     }
 
-    public FieldPane(final int x, final int y, String text, boolean isChangeable) {
+    public FieldPane(final int x, final int y, final String text, final boolean isChangeable) {
         super();
         this.x = x;
         this.y = y;
@@ -43,11 +43,12 @@ public class FieldPane extends Pane {
 
     }
 
-    public void setLabelText(String text) {
-        if (text.equals("0")) {
-            text = "";
+    public void setLabelText(final String text) {
+        String content = text;
+        if (content.equals("0")) {
+            content = "";
         }
-        this.label.setText(text);
+        this.label.setText(content);
     }
 
     private void setStyle() {

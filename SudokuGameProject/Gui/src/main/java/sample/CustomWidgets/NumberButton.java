@@ -25,7 +25,6 @@ public class NumberButton extends Button {
             ResourceBundle bundle = ResourceBundle.getBundle("MyBundle",
                     WindowManager.getInstance().getCurrentLocale());
             this.setText(bundle.getString("clearButton"));
-        } else {
         }
     }
 }

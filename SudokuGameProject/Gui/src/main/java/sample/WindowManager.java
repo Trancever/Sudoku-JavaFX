@@ -19,7 +19,7 @@ public class WindowManager {
         return isLoaded;
     }
 
-    public void setLoaded(boolean loaded) {
+    public void setLoaded(final boolean loaded) {
         isLoaded = loaded;
     }
 
@@ -42,7 +42,7 @@ public class WindowManager {
         return this.currentLocale;
     }
 
-    public void setPrimaryStage(Stage primaryStage) {
+    public void setPrimaryStage(final Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
 

@@ -1,7 +1,6 @@
 package sample.controllers;
 
 import com.google.common.io.Files;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import game.Game;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.adapter.JavaBeanIntegerPropertyBuilder;
@@ -28,7 +27,7 @@ import java.io.*;
 
 public class MainSudokuWindowController {
 
-    final static Logger logger = LoggerFactory.getLogger(MainSudokuWindowController.class);
+    static final Logger logger = LoggerFactory.getLogger(MainSudokuWindowController.class);
 
     private Game game;
 
@@ -75,7 +74,7 @@ public class MainSudokuWindowController {
 
     private void addButtonEvent(final NumberButton button) {
         button.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            public void handle(MouseEvent event) {
+            public void handle(final MouseEvent event) {
                 NumberButton button = (NumberButton) event.getSource();
                 logger.debug(button.toString() + " clicked. Number = " + button.getNumber());
                 if (currentSelectedField != null) {
@@ -109,7 +108,7 @@ public class MainSudokuWindowController {
                         int computedY =  y * 3 + z;
                         FieldPane pane;
                         if (this.game.isLoaded()) {
-                            pane = createFieldPane(computedX, computedY,this.game.getHelperValue(computedX, computedY));
+                            pane = createFieldPane(computedX, computedY, this.game.getHelperValue(computedX, computedY));
                         } else {
                             if (this.game.getSudokuBoard().getValue(computedX, computedY) == 0) {
                                 pane = createFieldPane(computedX, computedY, true);
@@ -140,7 +139,7 @@ public class MainSudokuWindowController {
 
     private void addSudokuFieldEvent(final FieldPane pane) {
         pane.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            public void handle(MouseEvent event) {
+            public void handle(final MouseEvent event) {
                 FieldPane pane = (FieldPane) event.getSource();
                 if (pane.isChangeable()) {
                     for (Node node : sudokuGrid.getChildren()) {

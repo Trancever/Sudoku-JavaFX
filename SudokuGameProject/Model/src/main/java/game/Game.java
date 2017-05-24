@@ -18,7 +18,7 @@ public class Game {
         return isLoaded;
     }
 
-    public Game(final GameLevel gameLevel, final SudokuBoard sudokuBoard, final boolean isLoaded, List<List<Boolean>> helperList) {
+    public Game(final GameLevel gameLevel, final SudokuBoard sudokuBoard, final boolean isLoaded, final List<List<Boolean>> helperList) {
         this.gameLevel = gameLevel;
         this.sudokuBoard = sudokuBoard;
         this.sudokuSolver = new BackTrackingSudokuSolver();
