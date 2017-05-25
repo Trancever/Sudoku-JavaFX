@@ -9,11 +9,11 @@ import java.util.ResourceBundle;
  */
 public class BindingFailedException extends NoSuchMethodException {
 
-    ResourceBundle labels = ResourceBundle.getBundle("MyBundle", WindowManager.getInstance().getCurrentLocale());
+    ResourceBundle labels;
 
-    private static final long serialVersionUID = 1L;
     public BindingFailedException(String message) {
         super(message);
+        labels = ResourceBundle.getBundle("MyBundle", WindowManager.getInstance().getCurrentLocale());
     }
 
     public String getLocalizedMessage() {

@@ -7,11 +7,11 @@ import java.util.ResourceBundle;
 
 public class FXMLOpenFailedException extends IOException {
 
-    ResourceBundle labels = ResourceBundle.getBundle("MyBundle", WindowManager.getInstance().getCurrentLocale());
+    ResourceBundle labels;
 
-    private static final long serialVersionUID = 1L;
     public FXMLOpenFailedException(String message) {
         super(message);
+        labels = ResourceBundle.getBundle("MyBundle", WindowManager.getInstance().getCurrentLocale());
     }
 
     public String getLocalizedMessage() {

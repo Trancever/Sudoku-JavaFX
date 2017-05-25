@@ -9,11 +9,11 @@ import java.util.ResourceBundle;
  * Created by Igor on 25.05.2017.
  */
 public class SaveGameWriteException extends IOException {
-    ResourceBundle labels = ResourceBundle.getBundle("MyBundle", WindowManager.getInstance().getCurrentLocale());
+    ResourceBundle labels;
 
-    private static final long serialVersionUID = 1L;
     public SaveGameWriteException(String message) {
         super(message);
+        labels = ResourceBundle.getBundle("MyBundle", WindowManager.getInstance().getCurrentLocale());
     }
 
     public String getLocalizedMessage() {
