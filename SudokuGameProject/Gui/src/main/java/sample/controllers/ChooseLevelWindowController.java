@@ -1,5 +1,6 @@
 package sample.controllers;
 
+import exceptions.SudokuDeserializeException;
 import game.Game;
 import game.GameLevel;
 import javafx.fxml.FXML;
@@ -7,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
@@ -132,16 +134,17 @@ public class ChooseLevelWindowController {
 
     @FXML
     public void onLoadGameButtonClicked() throws SaveGameReadException {
-        Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getInstance().getFileDao(WindowManager.SAVE_FILE_PATH);
-        SudokuBoard board = dao.read();
-        List<List<Boolean>> tmp = new ArrayList<List<Boolean>>();
-        for (int i  = 0; i < 9; i++) {
-            tmp.add(new ArrayList<Boolean>());
-            for (int j = 0; j < 9; j++) {
-                tmp.get(i).add(true);
-            }
-        }
         try {
+            Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getInstance().getFileDao(WindowManager.SAVE_FILE_PATH);
+            SudokuBoard board = dao.read();
+            List<List<Boolean>> tmp = new ArrayList<List<Boolean>>();
+            for (int i  = 0; i < 9; i++) {
+                tmp.add(new ArrayList<Boolean>());
+                for (int j = 0; j < 9; j++) {
+                    tmp.get(i).add(true);
+                }
+            }
+
             BufferedReader in = new BufferedReader(new FileReader(WindowManager.SAVE_HELPER_FILE_PATH));
             String line;
             while ((line = in.readLine()) != null) {
@@ -150,10 +153,16 @@ public class ChooseLevelWindowController {
                     tmp.get(Integer.parseInt(str[0])).set(Integer.parseInt(str[1]), Boolean.parseBoolean(str[2]));
                 }
             }
+
+            this.runGame(GameLevel.EASY, board, true, tmp);
+
         } catch (Exception e) {
-            throw new SaveGameReadException("SaveGameReadException");
-            //TODO: okienko informujace ze sie nie udalo wczytac gry
+            logger.error(e.getLocalizedMessage());
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error while loading game.");
+            alert.setHeaderText(null);
+            alert.setContentText("We have encountered problem while loading your last saved game. Sorry.");
+            alert.showAndWait();
         }
-        this.runGame(GameLevel.EASY, board, true, tmp);
     }
 }

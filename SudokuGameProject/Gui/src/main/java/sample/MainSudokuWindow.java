@@ -26,6 +26,7 @@ public class MainSudokuWindow {
         try {
             root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/MainSudokuWindow.fxml"), bundle);
         } catch (IOException e) {
+            logger.error("FXMLOpenFailedException while trying to load MainSudokuWindow fxml.");
             throw new FXMLOpenFailedException("FXMLOpenFailedException");
         }
         this.scene = new Scene(root);

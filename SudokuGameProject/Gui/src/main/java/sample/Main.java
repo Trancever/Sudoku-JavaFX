@@ -27,6 +27,7 @@ public class Main extends Application {
         try {
             TimeUnit.SECONDS.sleep(2);
         } catch (InterruptedException e) {
+            logger.error(e.getLocalizedMessage());
             throw new WaitFailedException("WaitFailedException");
         }
 
@@ -41,6 +42,7 @@ public class Main extends Application {
         try {
             root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/ChooseLevelWindow.fxml"), bundle);
         } catch (IOException e) {
+            logger.error(e.getLocalizedMessage());
             throw new FXMLOpenFailedException("FXMLOpenFailedException");
         }
         primaryStage.setTitle("Sudoku Game");

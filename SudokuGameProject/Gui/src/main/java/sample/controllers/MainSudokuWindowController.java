@@ -60,8 +60,8 @@ public class MainSudokuWindowController {
         try {
             this.initializeSudokuGrid();
         } catch (BindingFailedException e) {
-            logger.error("BindingFailedException", e);
-            e.getStackTrace();
+            logger.error(e.getLocalizedMessage());
+            e.printStackTrace();
         }
         this.initializeButtons();
         logger.debug("MainSudokuWindowController initialized.");
@@ -191,14 +191,19 @@ public class MainSudokuWindowController {
 
     @FXML
     public void onSaveStateButtonClicked() throws SaveGameWriteException {
-        Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getInstance().getFileDao(WindowManager.getInstance().SAVE_FILE_PATH);
-        dao.write(this.game.getSudokuBoard());
         try {
+            Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getInstance().getFileDao(WindowManager.getInstance().SAVE_FILE_PATH);
+            dao.write(this.game.getSudokuBoard());
             BufferedWriter out = new BufferedWriter(new FileWriter(WindowManager.SAVE_HELPER_FILE_PATH));
             out.write(generateFieldsProperties());
             out.close();
-        } catch (IOException e) {
-            throw new SaveGameWriteException("SaveGameWriteException");
+        } catch (Exception e) {
+            logger.error(e.getLocalizedMessage());
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setContentText("We have encountered error while trying to save the game.");
+            alert.setHeaderText(null);
+            alert.showAndWait();
         }
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
