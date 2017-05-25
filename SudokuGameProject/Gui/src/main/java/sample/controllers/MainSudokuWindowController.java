@@ -14,6 +14,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sample.CustomExceptions.BindingFailedException;
 import sample.CustomWidgets.FieldPane;
 import sample.CustomWidgets.NumberButton;
 import sample.WindowManager;
@@ -95,7 +96,7 @@ public class MainSudokuWindowController {
         });
     }
 
-    private void initializeSudokuGrid() {
+    private void initializeSudokuGrid() throws BindingFailedException {
         for (int x = 0; x < 3; x++) {
             for (int y = 0; y < 3; y++) {
                 GridPane grid = new GridPane();
@@ -123,9 +124,8 @@ public class MainSudokuWindowController {
                             Bindings.bindBidirectional(pane.getLabel().textProperty(),
                                     JavaBeanIntegerPropertyBuilder.create().bean(this.game.getSudokuBoard().
                                             getField(computedX, computedY)).name("value").build(), new CustomConverter());
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            logger.error("Exception: Cannot bind label text property with model SudokuField value.");
+                        } catch (NoSuchMethodException e) {
+                            throw new BindingFailedException("BindingFailedException");
                         }
                     }
                 }
