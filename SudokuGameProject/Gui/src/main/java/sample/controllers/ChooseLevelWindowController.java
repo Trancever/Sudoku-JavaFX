@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sample.CustomExceptions.FXMLOpenFailedException;
+import sample.CustomExceptions.SaveGameOpenFailedException;
 import sample.MainSudokuWindow;
 import sample.WindowManager;
 import sudokupack.Dao;
@@ -130,7 +131,7 @@ public class ChooseLevelWindowController {
     }
 
     @FXML
-    public void onLoadGameButtonClicked() {
+    public void onLoadGameButtonClicked() throws SaveGameOpenFailedException {
         Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getInstance().getFileDao(WindowManager.SAVE_FILE_PATH);
         SudokuBoard board = dao.read();
         List<List<Boolean>> tmp = new ArrayList<List<Boolean>>();
@@ -150,8 +151,7 @@ public class ChooseLevelWindowController {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
-            logger.error("Exception: Save game cannot be imported.");
+            throw new SaveGameOpenFailedException("SaveGameOpenFailedException");
             //TODO: okienko informujace ze sie nie udalo wczytac gry
         }
         this.runGame(GameLevel.EASY, board, true, tmp);
