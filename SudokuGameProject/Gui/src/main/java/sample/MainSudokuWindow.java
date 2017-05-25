@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sample.CustomExceptions.StartFailedException;
+import sample.CustomExceptions.FXMLOpenFailedException;
 
 import java.io.IOException;
 import java.util.ResourceBundle;
@@ -19,14 +19,14 @@ public class MainSudokuWindow {
     private Stage stage;
     private Scene scene;
 
-    public void start() throws StartFailedException {
+    public void start() throws FXMLOpenFailedException {
         ResourceBundle bundle = ResourceBundle.getBundle("MyBundle",
                 WindowManager.getInstance().getCurrentLocale());
         Parent root = null;
         try {
             root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/MainSudokuWindow.fxml"), bundle);
         } catch (IOException e) {
-            throw new StartFailedException("startFailedException");
+            throw new FXMLOpenFailedException("FXMLOpenFailedException");
         }
         this.scene = new Scene(root);
         this.stage = new Stage();

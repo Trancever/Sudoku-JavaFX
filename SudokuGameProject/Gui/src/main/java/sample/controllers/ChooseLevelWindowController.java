@@ -13,7 +13,7 @@ import javafx.scene.control.RadioButton;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sample.CustomExceptions.StartFailedException;
+import sample.CustomExceptions.FXMLOpenFailedException;
 import sample.MainSudokuWindow;
 import sample.WindowManager;
 import sudokupack.Dao;
@@ -84,7 +84,7 @@ public class ChooseLevelWindowController {
         try {
             WindowManager.getInstance().setGame(new Game(level, sudokuBoard, isLoaded, helperList));
             window.start();
-        } catch (StartFailedException e) {
+        } catch (FXMLOpenFailedException e) {
             logger.error(e.getLocalizedMessage());
             e.printStackTrace();
         }
@@ -99,7 +99,7 @@ public class ChooseLevelWindowController {
     }
 
     @FXML
-    public void onRadioToggleGroupToggled() throws IOException {
+    public void onRadioToggleGroupToggled() throws FXMLOpenFailedException {
 
         Scene scene = this.polishRadioButton.getScene();
         Locale locale;
@@ -108,8 +108,13 @@ public class ChooseLevelWindowController {
         } else {
             locale = new Locale("en", "US");
         }
-        Parent root = (Parent) FXMLLoader.load(getClass().getClassLoader().getResource("fxml/ChooseLevelWindow.fxml"),
-                ResourceBundle.getBundle("MyBundle", locale));
+        Parent root = null;
+        try {
+            root = (Parent) FXMLLoader.load(getClass().getClassLoader().getResource("fxml/ChooseLevelWindow.fxml"),
+                    ResourceBundle.getBundle("MyBundle", locale));
+        } catch (IOException e) {
+            throw new FXMLOpenFailedException("FXMLOpenFailedException");
+        }
         scene.setRoot(root);
         WindowManager.getInstance().setCurrentLocale(locale);
     }
