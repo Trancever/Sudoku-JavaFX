@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sample.CustomExceptions.FXMLOpenFailedException;
-import sample.CustomExceptions.SaveGameOpenFailedException;
+import sample.CustomExceptions.SaveGameReadException;
 import sample.MainSudokuWindow;
 import sample.WindowManager;
 import sudokupack.Dao;
@@ -131,7 +131,7 @@ public class ChooseLevelWindowController {
     }
 
     @FXML
-    public void onLoadGameButtonClicked() throws SaveGameOpenFailedException {
+    public void onLoadGameButtonClicked() throws SaveGameReadException {
         Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getInstance().getFileDao(WindowManager.SAVE_FILE_PATH);
         SudokuBoard board = dao.read();
         List<List<Boolean>> tmp = new ArrayList<List<Boolean>>();
@@ -151,7 +151,7 @@ public class ChooseLevelWindowController {
                 }
             }
         } catch (Exception e) {
-            throw new SaveGameOpenFailedException("SaveGameOpenFailedException");
+            throw new SaveGameReadException("SaveGameReadException");
             //TODO: okienko informujace ze sie nie udalo wczytac gry
         }
         this.runGame(GameLevel.EASY, board, true, tmp);

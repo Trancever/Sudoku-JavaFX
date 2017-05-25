@@ -9,11 +9,11 @@ import java.util.ResourceBundle;
 /**
  * Created by Igor on 25.05.2017.
  */
-public class SaveGameOpenFailedException extends Exception {
+public class SaveGameReadException extends Exception {
     ResourceBundle labels = ResourceBundle.getBundle("MyBundle", WindowManager.getInstance().getCurrentLocale());
 
     private static final long serialVersionUID = 1L;
-    public SaveGameOpenFailedException(String message) {
+    public SaveGameReadException(String message) {
         super(message);
     }
 

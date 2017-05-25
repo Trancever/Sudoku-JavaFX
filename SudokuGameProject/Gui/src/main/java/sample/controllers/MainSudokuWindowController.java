@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sample.CustomExceptions.BindingFailedException;
+import sample.CustomExceptions.SaveGameWriteException;
 import sample.CustomWidgets.FieldPane;
 import sample.CustomWidgets.NumberButton;
 import sample.WindowManager;
@@ -56,7 +57,12 @@ public class MainSudokuWindowController {
         if (!game.isLoaded()) {
             this.game.cleanFields();
         }
-        this.initializeSudokuGrid();
+        try {
+            this.initializeSudokuGrid();
+        } catch (BindingFailedException e) {
+            logger.error("BindingFailedException", e);
+            e.getStackTrace();
+        }
         this.initializeButtons();
         logger.debug("MainSudokuWindowController initialized.");
     }
@@ -184,7 +190,7 @@ public class MainSudokuWindowController {
     }
 
     @FXML
-    public void onSaveStateButtonClicked() {
+    public void onSaveStateButtonClicked() throws SaveGameWriteException {
         Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getInstance().getFileDao(WindowManager.getInstance().SAVE_FILE_PATH);
         dao.write(this.game.getSudokuBoard());
         try {
@@ -192,7 +198,7 @@ public class MainSudokuWindowController {
             out.write(generateFieldsProperties());
             out.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new SaveGameWriteException("SaveGameWriteException");
         }
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
