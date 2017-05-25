@@ -13,7 +13,7 @@ public class SaveGameReadException extends Exception {
 
     ResourceBundle labels;
 
-    public SaveGameReadException(String message) {
+    public SaveGameReadException(final String message) {
         super(message);
          labels = ResourceBundle.getBundle("MyBundle", WindowManager.getInstance().getCurrentLocale());
     }

@@ -11,7 +11,7 @@ public class WaitFailedException extends InterruptedException {
 
     ResourceBundle labels;
 
-    public WaitFailedException(String message) {
+    public WaitFailedException(final String message) {
         super(message);
         labels = ResourceBundle.getBundle("MyBundle", WindowManager.getInstance().getCurrentLocale());
     }

@@ -9,7 +9,7 @@ public class FXMLOpenFailedException extends IOException {
 
     ResourceBundle labels;
 
-    public FXMLOpenFailedException(String message) {
+    public FXMLOpenFailedException(final String message) {
         super(message);
         labels = ResourceBundle.getBundle("MyBundle", WindowManager.getInstance().getCurrentLocale());
     }

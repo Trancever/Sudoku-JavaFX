@@ -11,7 +11,7 @@ import java.util.ResourceBundle;
 public class SaveGameWriteException extends IOException {
     ResourceBundle labels;
 
-    public SaveGameWriteException(String message) {
+    public SaveGameWriteException(final String message) {
         super(message);
         labels = ResourceBundle.getBundle("MyBundle", WindowManager.getInstance().getCurrentLocale());
     }
