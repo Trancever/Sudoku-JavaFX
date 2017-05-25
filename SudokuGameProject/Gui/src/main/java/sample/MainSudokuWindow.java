@@ -7,7 +7,9 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sample.CustomExceptions.StartFailedException;
 
+import java.io.IOException;
 import java.util.ResourceBundle;
 
 public class MainSudokuWindow {
@@ -17,10 +19,15 @@ public class MainSudokuWindow {
     private Stage stage;
     private Scene scene;
 
-    public void start() throws Exception {
+    public void start() throws StartFailedException {
         ResourceBundle bundle = ResourceBundle.getBundle("MyBundle",
                 WindowManager.getInstance().getCurrentLocale());
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/MainSudokuWindow.fxml"), bundle);
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/MainSudokuWindow.fxml"), bundle);
+        } catch (IOException e) {
+            throw new StartFailedException("startFailedException");
+        }
         this.scene = new Scene(root);
         this.stage = new Stage();
         this.stage.setTitle("Sudoku Game");

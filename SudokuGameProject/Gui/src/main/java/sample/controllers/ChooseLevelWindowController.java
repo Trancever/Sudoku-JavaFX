@@ -13,6 +13,7 @@ import javafx.scene.control.RadioButton;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sample.CustomExceptions.StartFailedException;
 import sample.MainSudokuWindow;
 import sample.WindowManager;
 import sudokupack.Dao;
@@ -83,7 +84,8 @@ public class ChooseLevelWindowController {
         try {
             WindowManager.getInstance().setGame(new Game(level, sudokuBoard, isLoaded, helperList));
             window.start();
-        } catch (Exception e) {
+        } catch (StartFailedException e) {
+            logger.error(e.getLocalizedMessage());
             e.printStackTrace();
         }
         Stage stage = (Stage) exitButton.getScene().getWindow();
