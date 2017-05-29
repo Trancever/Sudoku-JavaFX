@@ -9,11 +9,15 @@ public class SudokuField implements Serializable, Cloneable, Comparable {
 
     private Integer value;
 
+    private Boolean isChangeable;
+
     public SudokuField() {
         value = new Integer(0);
+        isChangeable = new Boolean(false);
     }
     public SudokuField(final int value) {
         this.value = value;
+        this.isChangeable = new Boolean(false);
     }
 
     public int getValue() {
@@ -23,6 +27,14 @@ public class SudokuField implements Serializable, Cloneable, Comparable {
 
     public void setValue(final int value) {
         this.value = new Integer(value);
+    }
+
+    public Boolean getChangeable() {
+        return isChangeable;
+    }
+
+    public void setChangeable(Boolean changeable) {
+        isChangeable = changeable;
     }
 
     @Override

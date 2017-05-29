@@ -1,6 +1,5 @@
 package sample.controllers;
 
-import com.google.common.io.Files;
 import game.Game;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.adapter.JavaBeanIntegerPropertyBuilder;
@@ -23,8 +22,6 @@ import sample.helpers.CustomConverter;
 import sudokupack.Dao;
 import sudokupack.SudokuBoard;
 import sudokupack.SudokuBoardDaoFactory;
-
-import java.io.*;
 
 
 public class MainSudokuWindowController {
@@ -112,17 +109,17 @@ public class MainSudokuWindowController {
                 for (int w = 0; w < 3; w++) {
                     for (int z = 0; z < 3; z++) {
                         int computedX = x * 3 + w;
-                        int computedY =  y * 3 + z;
-                        FieldPane pane;
-                        if (this.game.isLoaded()) {
-                            pane = createFieldPane(computedX, computedY, this.game.getHelperValue(computedX, computedY));
-                        } else {
-                            if (this.game.getSudokuBoard().getValue(computedX, computedY) == 0) {
-                                pane = createFieldPane(computedX, computedY, true);
-                            } else {
-                                pane = createFieldPane(computedX, computedY, false);
-                            }
-                        }
+                        int computedY = y * 3 + z;
+                        FieldPane pane = this.createFieldPane(computedX, computedY);
+//                        if (this.game.isLoaded()) {
+//                            pane = createFieldPane(computedX, computedY);
+//                        } else {
+//                            if (this.game.getSudokuBoard().getValue(computedX, computedY) == 0) {
+//                                pane = createFieldPane(computedX, computedY, true);
+//                            } else {
+//                                pane = createFieldPane(computedX, computedY, false);
+//                            }
+//                        }
                         this.addSudokuFieldEvent(pane);
                         GridPane.setConstraints(pane, z, w);
                         grid.getChildren().add(pane);
@@ -139,8 +136,9 @@ public class MainSudokuWindowController {
         }
     }
 
-    private FieldPane createFieldPane(final int x, final int y, final boolean changeable) {
-        return new FieldPane(x, y, Integer.toString(this.game.getSudokuBoard().getValue(x, y)), changeable);
+    private FieldPane createFieldPane(final int x, final int y) {
+        return new FieldPane(x, y, Integer.toString(this.game.getSudokuBoard().getValue(x, y)),
+                                                        this.game.getSudokuBoard().getField(x, y).getChangeable());
     }
 
     private void addSudokuFieldEvent(final FieldPane pane) {
@@ -194,9 +192,6 @@ public class MainSudokuWindowController {
         try {
             Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getInstance().getFileDao(WindowManager.getInstance().SAVE_FILE_PATH);
             dao.write(this.game.getSudokuBoard());
-            BufferedWriter out = new BufferedWriter(new FileWriter(WindowManager.SAVE_HELPER_FILE_PATH));
-            out.write(generateFieldsProperties());
-            out.close();
         } catch (Exception e) {
             logger.error(e.getLocalizedMessage());
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -211,19 +206,5 @@ public class MainSudokuWindowController {
         alert.setContentText("Your game has been successfully saved.");
         alert.setHeaderText(null);
         alert.showAndWait();
-    }
-
-    private String generateFieldsProperties() {
-        StringBuilder str = new StringBuilder();
-        for (Node node : sudokuGrid.getChildren()) {
-            GridPane innerGrid = (GridPane) node;
-            for (Node field : innerGrid.getChildren()) {
-                FieldPane pane = (FieldPane) field;
-                str.append(Integer.toString(pane.getX()) + ",");
-                str.append(Integer.toString(pane.getY()) + ",");
-                str.append(Boolean.toString(pane.isChangeable()) + "\n");
-            }
-        }
-        return str.toString();
     }
 }

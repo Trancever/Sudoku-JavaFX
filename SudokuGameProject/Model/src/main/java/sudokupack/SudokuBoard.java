@@ -113,6 +113,7 @@ public class SudokuBoard implements Serializable, Cloneable {
             int col = random.nextInt(COLUMNS);
             if (this.getValue(row, col) != 0) {
                 this.setValue(row, col, 0);
+                this.getField(row, col).setChangeable(true);
                 tmp--;
             }
         }

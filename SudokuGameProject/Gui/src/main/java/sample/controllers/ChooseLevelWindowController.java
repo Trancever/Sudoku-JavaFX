@@ -59,17 +59,17 @@ public class ChooseLevelWindowController {
 
     @FXML
     public void onEasyButtonClick() {
-        this.runGame(GameLevel.EASY, new SudokuBoard(), false, null);
+        this.runGame(GameLevel.EASY, new SudokuBoard(), false);
     }
 
     @FXML
     public void onMediumButtonClick() {
-        this.runGame(GameLevel.MEDIUM, new SudokuBoard(), false, null);
+        this.runGame(GameLevel.MEDIUM, new SudokuBoard(), false);
     }
 
     @FXML
     public void onHardButtonClick() {
-        this.runGame(GameLevel.HARD, new SudokuBoard(), false, null);
+        this.runGame(GameLevel.HARD, new SudokuBoard(), false);
     }
 
     @FXML
@@ -82,10 +82,10 @@ public class ChooseLevelWindowController {
         logger.debug("ChooseLevelWindowController initialized");
     }
 
-    private void runGame(final GameLevel level, final SudokuBoard sudokuBoard, final boolean isLoaded, final List<List<Boolean>> helperList) {
+    private void runGame(final GameLevel level, final SudokuBoard sudokuBoard, final boolean isLoaded) {
         MainSudokuWindow window = new MainSudokuWindow();
         try {
-            WindowManager.getInstance().setGame(new Game(level, sudokuBoard, isLoaded, helperList));
+            WindowManager.getInstance().setGame(new Game(level, sudokuBoard, isLoaded));
             window.start();
         } catch (FXMLOpenFailedException e) {
             logger.error(e.getLocalizedMessage());
@@ -137,25 +137,7 @@ public class ChooseLevelWindowController {
         try {
             Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getInstance().getFileDao(WindowManager.SAVE_FILE_PATH);
             SudokuBoard board = dao.read();
-            List<List<Boolean>> tmp = new ArrayList<List<Boolean>>();
-            for (int i  = 0; i < 9; i++) {
-                tmp.add(new ArrayList<Boolean>());
-                for (int j = 0; j < 9; j++) {
-                    tmp.get(i).add(true);
-                }
-            }
-
-            BufferedReader in = new BufferedReader(new FileReader(WindowManager.SAVE_HELPER_FILE_PATH));
-            String line;
-            while ((line = in.readLine()) != null) {
-                if (line != "") {
-                    String[] str = line.split(",");
-                    tmp.get(Integer.parseInt(str[0])).set(Integer.parseInt(str[1]), Boolean.parseBoolean(str[2]));
-                }
-            }
-
-            this.runGame(GameLevel.EASY, board, true, tmp);
-
+            this.runGame(null, board, true);
         } catch (Exception e) {
             logger.error(e.getLocalizedMessage());
             Alert alert = new Alert(Alert.AlertType.ERROR);
