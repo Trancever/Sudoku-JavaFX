@@ -1,5 +1,7 @@
 package sample.controllers;
 
+import exceptions.SudokuDeserializeException;
+import exceptions.SudokuSerializeException;
 import game.Game;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.adapter.JavaBeanIntegerPropertyBuilder;
@@ -188,11 +190,11 @@ public class MainSudokuWindowController {
     }
 
     @FXML
-    public void onSaveStateButtonClicked() throws SaveGameWriteException {
+    public void onSaveStateButtonClicked() {
         try {
             Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getInstance().getFileDao(WindowManager.getInstance().SAVE_FILE_PATH);
             dao.write(this.game.getSudokuBoard());
-        } catch (Exception e) {
+        } catch (SudokuSerializeException e) {
             logger.error(e.getLocalizedMessage());
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Error");

@@ -138,7 +138,7 @@ public class ChooseLevelWindowController {
             Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getInstance().getFileDao(WindowManager.SAVE_FILE_PATH);
             SudokuBoard board = dao.read();
             this.runGame(null, board, true);
-        } catch (Exception e) {
+        } catch (SudokuDeserializeException e) {
             logger.error(e.getLocalizedMessage());
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error while loading game.");
