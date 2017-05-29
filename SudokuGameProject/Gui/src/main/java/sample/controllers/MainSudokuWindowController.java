@@ -1,6 +1,5 @@
 package sample.controllers;
 
-import exceptions.SudokuDeserializeException;
 import exceptions.SudokuSerializeException;
 import game.Game;
 import javafx.beans.binding.Bindings;
@@ -12,11 +11,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sample.CustomExceptions.BindingFailedException;
-import sample.CustomExceptions.SaveGameWriteException;
 import sample.CustomWidgets.FieldPane;
 import sample.CustomWidgets.NumberButton;
 import sample.WindowManager;
@@ -24,6 +23,8 @@ import sample.helpers.CustomConverter;
 import sudokupack.Dao;
 import sudokupack.SudokuBoard;
 import sudokupack.SudokuBoardDaoFactory;
+
+import java.io.File;
 
 
 public class MainSudokuWindowController {
@@ -113,15 +114,6 @@ public class MainSudokuWindowController {
                         int computedX = x * 3 + w;
                         int computedY = y * 3 + z;
                         FieldPane pane = this.createFieldPane(computedX, computedY);
-//                        if (this.game.isLoaded()) {
-//                            pane = createFieldPane(computedX, computedY);
-//                        } else {
-//                            if (this.game.getSudokuBoard().getValue(computedX, computedY) == 0) {
-//                                pane = createFieldPane(computedX, computedY, true);
-//                            } else {
-//                                pane = createFieldPane(computedX, computedY, false);
-//                            }
-//                        }
                         this.addSudokuFieldEvent(pane);
                         GridPane.setConstraints(pane, z, w);
                         grid.getChildren().add(pane);
@@ -192,11 +184,20 @@ public class MainSudokuWindowController {
     @FXML
     public void onSaveStateButtonClicked() {
         try {
-            Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getInstance().getFileDao(WindowManager.getInstance().SAVE_FILE_PATH);
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Select location where you want to save your game.");
+            fileChooser.setInitialFileName("Sudoku-save");
+            fileChooser.getExtensionFilters().add(new FileChooser.
+                                    ExtensionFilter("Default Sudoku game save extension", "*.xD"));
+            File file = fileChooser.showSaveDialog(this.buttonsGrid.getScene().getWindow());
+            if (file == null) {
+                return;
+            }
+            Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getInstance().getFileDao(file.getPath());
             dao.write(this.game.getSudokuBoard());
         } catch (SudokuSerializeException e) {
             logger.error(e.getLocalizedMessage());
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setContentText("We have encountered error while trying to save the game.");
             alert.setHeaderText(null);

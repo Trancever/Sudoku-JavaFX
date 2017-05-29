@@ -12,6 +12,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -135,10 +136,18 @@ public class ChooseLevelWindowController {
     @FXML
     public void onLoadGameButtonClicked() throws SaveGameReadException {
         try {
-            Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getInstance().getFileDao(WindowManager.SAVE_FILE_PATH);
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Select file with saved game.");
+            fileChooser.getExtensionFilters().add(new FileChooser.
+                                        ExtensionFilter("Default Sudoku game extension", "*.xD"));
+            File file = fileChooser.showOpenDialog(this.exitButton.getScene().getWindow());
+            if (file ==  null) {
+                return;
+            }
+            Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getInstance().getFileDao(file.getPath());
             SudokuBoard board = dao.read();
             this.runGame(null, board, true);
-        } catch (SudokuDeserializeException e) {
+        } catch (Exception e) {
             logger.error(e.getLocalizedMessage());
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error while loading game.");
