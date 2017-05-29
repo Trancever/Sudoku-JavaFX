@@ -3,7 +3,11 @@ package sudokupack;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
+import java.util.Random;
+
 public class BackTrackingSudokuSolver implements SudokuSolver {
+
+    private Random random = new Random();
 
     public boolean solve(final SudokuBoard sudokuBoard) {
         int row, col;
@@ -16,9 +20,15 @@ public class BackTrackingSudokuSolver implements SudokuSolver {
         if (tmp[0] == 0) {
             return true;
         }
-
+        int offset = random.nextInt(9) + 1;
         for (int num = 1; num <= 9; num++) {
-            sudokuBoard.setValue(row, col, num);
+            int value = 0;
+            if ((num + offset) <= 9) {
+                value = num + offset;
+            } else {
+                value = Math.abs(num - offset);
+            }
+            sudokuBoard.setValue(row, col, value);
             if (isSafe(row, col, sudokuBoard)) {
                 if (solve(sudokuBoard)) {
                     return true;
