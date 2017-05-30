@@ -10,7 +10,11 @@ public class SudokuBoardDaoFactory {
         return instance;
     }
 
-    public Dao<SudokuBoard> getFileDao(final String filename) {
-        return new FileSudokuBoardDao(filename);
+    public Dao<SudokuBoard> getFileDao() {
+        return new FileSudokuBoardDao();
+    }
+
+    public Dao<SudokuBoard> getJDBCDao() {
+        return new JDBCSudokuBoardDao(PersistanceUnit.NAME);
     }
 }

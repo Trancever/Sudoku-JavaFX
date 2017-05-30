@@ -61,9 +61,10 @@
          <top>
             <HBox alignment="CENTER" prefHeight="80.0" prefWidth="200.0" spacing="30.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="newGameButton" mnemonicParsing="false" onAction="#onNewGameButtonClicked" styleClass="manage-game-button" text="%newGameButton" />
-                  <Button fx:id="resetGameButton" mnemonicParsing="false" onAction="#onResetGameButtonClicked" styleClass="manage-game-button" text="%resetGameButton" />
-                  <Button fx:id="saveStateButton" mnemonicParsing="false" onAction="#onSaveStateButtonClicked" styleClass="manage-game-button" text="%saveGameButton" />
+                  <Button mnemonicParsing="false" onAction="#onNewGameButtonClicked" styleClass="manage-game-button" text="%newGameButton" />
+                  <Button mnemonicParsing="false" onAction="#onResetGameButtonClicked" styleClass="manage-game-button" text="%resetGameButton" />
+                  <Button mnemonicParsing="false" onAction="#onSaveFileStateButtonClicked" styleClass="manage-game-button" text="%saveFileGameButton" />
+                  <Button mnemonicParsing="false" styleClass="manage-game-button" onAction="#onSaveDBStateButtonClicked" text="%saveDBGameButton" />
                </children>
                <BorderPane.margin>
                   <Insets left="130.0" top="10.0" />

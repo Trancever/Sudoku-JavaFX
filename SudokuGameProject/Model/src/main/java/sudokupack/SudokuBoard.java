@@ -3,20 +3,32 @@ package sudokupack;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
+import javax.persistence.*;
 import java.lang.reflect.Array;
 import java.util.*;
 import java.io.Serializable;
 
-
+@Entity
 public class SudokuBoard implements Serializable, Cloneable {
 
+    @Transient
     private static final int ROWS = 9;
+
+    @Transient
     private static final int COLUMNS = 9;
 
+    @Id
+    private String id;
+
+    @Transient
     private ArrayList<ArrayList<SudokuField>> field;
+
+    @OneToMany(cascade = CascadeType.PERSIST)
+    private List<SudokuField> linearBoard;
 
     public SudokuBoard() {
         field = new ArrayList<ArrayList<SudokuField>>();
+        linearBoard = new ArrayList<SudokuField>();
         initBoard();
     }
 
@@ -24,7 +36,9 @@ public class SudokuBoard implements Serializable, Cloneable {
         for (int i = 0; i < ROWS; i++) {
             field.add(new ArrayList<SudokuField>());
             for (int j = 0; j < COLUMNS; j++) {
-                field.get(i).add(new SudokuField());
+                SudokuField sudokuField = new SudokuField();
+                sudokuField.setSudokuBoard(this);
+                field.get(i).add(sudokuField);
             }
         }
         int[] tmp = new int[3];
@@ -71,6 +85,8 @@ public class SudokuBoard implements Serializable, Cloneable {
         }
         ArrayList<SudokuField> tmp = new ArrayList<SudokuField>();
         for (int i = 0; i < COLUMNS; i++) {
+            SudokuField sudokuField = new SudokuField();
+            sudokuField.setSudokuBoard(this);
             tmp.add(new SudokuField());
             tmp.get(i).setValue(field.get(row).get(i).getValue());
         }
@@ -83,6 +99,8 @@ public class SudokuBoard implements Serializable, Cloneable {
         }
         ArrayList<SudokuField> tmp = new ArrayList<SudokuField>();
         for (int i = 0; i < ROWS; i++) {
+            SudokuField sudokuField = new SudokuField();
+            sudokuField.setSudokuBoard(this);
             tmp.add(new SudokuField());
             tmp.get(i).setValue(field.get(i).get(column).getValue());
         }
@@ -137,6 +155,32 @@ public class SudokuBoard implements Serializable, Cloneable {
         }
         return true;
     }
+
+    public void convert2dto1d() {
+        for(int i = 0; i < ROWS; i ++) {
+            for(int j = 0; j < COLUMNS; j++) {
+                this.linearBoard.add(this.field.get(i).get(j));
+            }
+        }
+    }
+
+    public void convert1dto2d() {
+
+        for(int i = 0; i < linearBoard.size(); i ++) {
+            int x = i % 9;
+            int y = i / 9;
+            this.setValue(y, x, this.linearBoard.get(i).getValue());
+        }
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
 
     @Override
     protected Object clone() throws CloneNotSupportedException {

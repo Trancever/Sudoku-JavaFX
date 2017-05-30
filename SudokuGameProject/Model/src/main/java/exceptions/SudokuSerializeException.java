@@ -5,7 +5,7 @@ package exceptions;
  */
 public class SudokuSerializeException extends SudokuDaoException {
 
-    public SudokuSerializeException() {}
+    public SudokuSerializeException() { }
 
     public SudokuSerializeException(final String message) {
         super(message);

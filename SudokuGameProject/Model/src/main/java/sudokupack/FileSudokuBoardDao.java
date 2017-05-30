@@ -8,24 +8,21 @@ import java.io.*;
 
 public class FileSudokuBoardDao implements Dao<SudokuBoard> {
 
-    private String filename;
     private FileOutputStream fileOutputStream;
     private ObjectOutputStream objectOutputStream;
     private FileInputStream fileInputStream;
     private ObjectInputStream objectInputStream;
 
-    public FileSudokuBoardDao(final String filename) {
-        this.filename = filename;
-    }
+    public FileSudokuBoardDao() { }
 
-    public SudokuBoard read() throws SudokuDeserializeException {
+    public SudokuBoard read(final String name) throws SudokuDeserializeException {
         try {
-            fileInputStream = new FileInputStream(filename);
+            fileInputStream = new FileInputStream(name);
             objectInputStream = new ObjectInputStream(fileInputStream);
             SudokuBoard board = (SudokuBoard) objectInputStream.readObject();
             return board;
         } catch (FileNotFoundException e) {
-            throw new SudokuDeserializeException("File " + filename + " not found.");
+            throw new SudokuDeserializeException("File " + name + " not found.");
         } catch (IOException e) {
             throw new SudokuDeserializeException("Exception while instantiating ObjectInputStream.");
         } catch (ClassNotFoundException e) {
@@ -49,13 +46,13 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard> {
         }
     }
 
-    public void write(final SudokuBoard obj) throws SudokuSerializeException {
+    public void write(final SudokuBoard obj, final String name) throws SudokuSerializeException {
         try {
-            fileOutputStream = new FileOutputStream(filename);
+            fileOutputStream = new FileOutputStream(name);
             objectOutputStream = new ObjectOutputStream(fileOutputStream);
             objectOutputStream.writeObject(obj);
         } catch (FileNotFoundException ex) {
-            throw new SudokuSerializeException("File " + filename + " not found.");
+            throw new SudokuSerializeException("File " + name + " not found.");
         } catch (IOException ex) {
             throw new SudokuSerializeException("Exception while writing object to file.");
         } finally {
@@ -77,6 +74,7 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard> {
         }
     }
 
+    @Override
     public void finalize() throws SudokuDaoException {
         if (fileOutputStream != null) {
             try {

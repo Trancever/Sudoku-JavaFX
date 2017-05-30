@@ -18,20 +18,20 @@ public class FileSudokuBoardDaoTest {
 
     @Before
     public void init() {
-        fileSudokuBoardDao = new FileSudokuBoardDao(FILENAME);
+        fileSudokuBoardDao = new FileSudokuBoardDao();
     }
 
     @Test
     public void writeObjectToFile() {
         SudokuBoard board = new SudokuBoard();
-        fileSudokuBoardDao.write(board);
+        fileSudokuBoardDao.write(board, FILENAME);
         File file = new File(FILENAME);
         Assert.assertTrue(file.exists() && !file.isDirectory());
     }
 
     @Test
     public void readObjectFromFile() {
-        SudokuBoard board = fileSudokuBoardDao.read();
+        SudokuBoard board = fileSudokuBoardDao.read(FILENAME);
         Assert.assertTrue(board != null);
     }
 
@@ -40,8 +40,8 @@ public class FileSudokuBoardDaoTest {
         SudokuSolver solver = new BackTrackingSudokuSolver();
         SudokuBoard board = new SudokuBoard();
         solver.solve(board);
-        fileSudokuBoardDao.write(board);
-        SudokuBoard board2 = fileSudokuBoardDao.read();
+        fileSudokuBoardDao.write(board, FILENAME);
+        SudokuBoard board2 = fileSudokuBoardDao.read(FILENAME);
 
         Assert.assertTrue(board.equals(board2));
     }

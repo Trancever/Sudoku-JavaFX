@@ -3,13 +3,35 @@ package sudokupack;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
+@Entity
 public class SudokuField implements Serializable, Cloneable, Comparable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @Basic(fetch = FetchType.EAGER)
+    @Column(name = "Value")
     private Integer value;
 
+    @Basic(fetch = FetchType.EAGER)
+    @Column(name = "IsChangeable")
     private Boolean isChangeable;
+
+    public SudokuBoard getSudokuBoard() {
+        return sudokuBoard;
+    }
+
+    public void setSudokuBoard(SudokuBoard sudokuBoard) {
+        this.sudokuBoard = sudokuBoard;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "board_fk", referencedColumnName = "id")
+    private SudokuBoard sudokuBoard;
 
     public SudokuField() {
         value = new Integer(0);
@@ -33,7 +55,7 @@ public class SudokuField implements Serializable, Cloneable, Comparable {
         return isChangeable;
     }
 
-    public void setChangeable(Boolean changeable) {
+    public void setChangeable(final Boolean changeable) {
         isChangeable = changeable;
     }
 

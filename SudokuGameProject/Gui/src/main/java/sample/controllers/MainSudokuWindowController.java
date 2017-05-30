@@ -21,6 +21,7 @@ import sample.CustomWidgets.NumberButton;
 import sample.WindowManager;
 import sample.helpers.CustomConverter;
 import sudokupack.Dao;
+import sudokupack.JDBCSudokuBoardDao;
 import sudokupack.SudokuBoard;
 import sudokupack.SudokuBoardDaoFactory;
 
@@ -182,19 +183,19 @@ public class MainSudokuWindowController {
     }
 
     @FXML
-    public void onSaveStateButtonClicked() {
+    public void onSaveFileStateButtonClicked() {
         try {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Select location where you want to save your game.");
             fileChooser.setInitialFileName("Sudoku-save");
             fileChooser.getExtensionFilters().add(new FileChooser.
-                                    ExtensionFilter("Default Sudoku game save extension", "*.xD"));
+                    ExtensionFilter("Default Sudoku game save extension", "*.xD"));
             File file = fileChooser.showSaveDialog(this.buttonsGrid.getScene().getWindow());
             if (file == null) {
                 return;
             }
-            Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getInstance().getFileDao(file.getPath());
-            dao.write(this.game.getSudokuBoard());
+            Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getInstance().getFileDao();
+            dao.write(this.game.getSudokuBoard(), file.getPath());
         } catch (SudokuSerializeException e) {
             logger.error(e.getLocalizedMessage());
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -209,5 +210,10 @@ public class MainSudokuWindowController {
         alert.setContentText("Your game has been successfully saved.");
         alert.setHeaderText(null);
         alert.showAndWait();
+    }
+
+    @FXML
+    public void onSaveDBStateButtonClicked() {
+        System.out.println("dupa");
     }
 }

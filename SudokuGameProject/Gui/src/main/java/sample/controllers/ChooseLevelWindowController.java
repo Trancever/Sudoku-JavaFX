@@ -144,8 +144,8 @@ public class ChooseLevelWindowController {
             if (file ==  null) {
                 return;
             }
-            Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getInstance().getFileDao(file.getPath());
-            SudokuBoard board = dao.read();
+            Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getInstance().getFileDao();
+            SudokuBoard board = dao.read(file.getPath());
             this.runGame(null, board, true);
         } catch (SudokuDeserializeException e) {
             logger.error(e.getLocalizedMessage());

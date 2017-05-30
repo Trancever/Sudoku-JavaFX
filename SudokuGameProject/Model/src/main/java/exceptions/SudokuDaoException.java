@@ -5,7 +5,7 @@ package exceptions;
  */
 public class SudokuDaoException extends RuntimeException {
 
-    public SudokuDaoException() {}
+    public SudokuDaoException() { }
 
     public SudokuDaoException(final String message) {
         super(message);
