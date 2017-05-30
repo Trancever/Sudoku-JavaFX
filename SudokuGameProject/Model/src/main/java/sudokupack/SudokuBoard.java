@@ -165,11 +165,11 @@ public class SudokuBoard implements Serializable, Cloneable {
     }
 
     public void convert1dto2d() {
-
         for(int i = 0; i < linearBoard.size(); i ++) {
             int x = i % 9;
             int y = i / 9;
             this.setValue(y, x, this.linearBoard.get(i).getValue());
+            this.field.get(y).get(x).setChangeable(this.linearBoard.get(i).getChangeable());
         }
     }
 

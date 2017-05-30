@@ -8,10 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.RadioButton;
+import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
@@ -21,14 +18,12 @@ import sample.CustomExceptions.SaveGameReadException;
 import sample.MainSudokuWindow;
 import sample.WindowManager;
 import sudokupack.Dao;
+import sudokupack.JDBCSudokuBoardDao;
 import sudokupack.SudokuBoard;
 import sudokupack.SudokuBoardDaoFactory;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class ChooseLevelWindowController {
 
@@ -134,14 +129,14 @@ public class ChooseLevelWindowController {
     }
 
     @FXML
-    public void onLoadGameButtonClicked() throws SaveGameReadException {
+    public void onLoadFileGameButtonClicked() throws SaveGameReadException {
         try {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Select file with saved game.");
             fileChooser.getExtensionFilters().add(new FileChooser.
-                                        ExtensionFilter("Default Sudoku game extension", "*.xD"));
+                    ExtensionFilter("Default Sudoku game extension", "*.xD"));
             File file = fileChooser.showOpenDialog(this.exitButton.getScene().getWindow());
-            if (file ==  null) {
+            if (file == null) {
                 return;
             }
             Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getInstance().getFileDao();
@@ -149,11 +144,35 @@ public class ChooseLevelWindowController {
             this.runGame(null, board, true);
         } catch (SudokuDeserializeException e) {
             logger.error(e.getLocalizedMessage());
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error while loading game.");
-            alert.setHeaderText(null);
-            alert.setContentText("We have encountered problem while loading your last saved game. Sorry.");
-            alert.showAndWait();
+            notifyAboutNotSuccessfullDeserialization();
+        }
+    }
+
+    private void notifyAboutNotSuccessfullDeserialization() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error while loading game.");
+        alert.setHeaderText(null);
+        alert.setContentText("We have encountered problem while loading your last saved game. Sorry.");
+        alert.showAndWait();
+    }
+
+    @FXML
+    public void onLoadDBGameButtonClicked() {
+        try {
+            Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getInstance().getJDBCDao();
+            JDBCSudokuBoardDao jdbcDao = (JDBCSudokuBoardDao) dao;
+            List<String> choices = jdbcDao.getAllBoardsNames();
+            ChoiceDialog<String> dialog = new ChoiceDialog<String>("", choices);
+            dialog.setTitle("Sudoku loader");
+            dialog.setHeaderText(null);
+            dialog.setContentText("Choose which save to load:");
+            Optional<String> result = dialog.showAndWait();
+            SudokuBoard board = dao.read(result.get());
+            board.convert1dto2d();
+            this.runGame(null, board, true);
+        } catch (Exception e) {
+            logger.error(e.getLocalizedMessage());
+            notifyAboutNotSuccessfullDeserialization();
         }
     }
 }

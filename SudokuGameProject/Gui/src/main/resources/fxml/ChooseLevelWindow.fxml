@@ -38,7 +38,8 @@
                             <menus>
                                 <Menu mnemonicParsing="false" text="File">
                                     <items>
-                                        <MenuItem onAction="#onLoadGameButtonClicked" fx:id="loadItem" mnemonicParsing="false" text="Load previous game"/>
+                                        <MenuItem onAction="#onLoadFileGameButtonClicked" fx:id="loadItem" mnemonicParsing="false" text="Load from file"/>
+                                        <MenuItem onAction="#onLoadDBGameButtonClicked"  mnemonicParsing="false" text="Load from database"/>
                                         <MenuItem onAction="#onCloseButtonClicked" fx:id="closeItem" mnemonicParsing="false" text="Close"/>
                                     </items>
                                 </Menu>
