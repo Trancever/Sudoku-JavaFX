@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
@@ -24,8 +25,8 @@ import sudokupack.Dao;
 import sudokupack.JDBCSudokuBoardDao;
 import sudokupack.SudokuBoard;
 import sudokupack.SudokuBoardDaoFactory;
-
 import java.io.File;
+import java.util.Optional;
 
 
 public class MainSudokuWindowController {
@@ -196,15 +197,33 @@ public class MainSudokuWindowController {
             }
             Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getInstance().getFileDao();
             dao.write(this.game.getSudokuBoard(), file.getPath());
+            this.notifyAboutSuccessfullSerialization();
         } catch (SudokuSerializeException e) {
             logger.error(e.getLocalizedMessage());
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setContentText("We have encountered error while trying to save the game.");
-            alert.setHeaderText(null);
-            alert.showAndWait();
+            this.notifyAboutNotSucessfullSerialization();
         }
+    }
 
+    @FXML
+    public void onSaveDBStateButtonClicked() {
+        try {
+            TextInputDialog dialog = new TextInputDialog("Sudoku");
+            dialog.setTitle("Specify name for saving.");
+            dialog.setHeaderText(null);
+            dialog.setContentText("Please, specify name for your save.");
+            Optional<String> result = dialog.showAndWait();
+            Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getInstance().getJDBCDao();
+            this.game.getSudokuBoard().convert2dto1d();
+            this.game.getSudokuBoard().setId(result.get());
+            dao.write(this.game.getSudokuBoard(), null);
+            this.notifyAboutSuccessfullSerialization();
+        } catch (Exception e) {
+            logger.error(e.getLocalizedMessage());
+            this.notifyAboutNotSucessfullSerialization();
+        }
+    }
+
+    private void notifyAboutSuccessfullSerialization() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Game saved");
         alert.setContentText("Your game has been successfully saved.");
@@ -212,8 +231,11 @@ public class MainSudokuWindowController {
         alert.showAndWait();
     }
 
-    @FXML
-    public void onSaveDBStateButtonClicked() {
-        System.out.println("dupa");
+    private void notifyAboutNotSucessfullSerialization() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setContentText("We have encountered error while trying to save the game.");
+        alert.setHeaderText(null);
+        alert.showAndWait();
     }
 }
