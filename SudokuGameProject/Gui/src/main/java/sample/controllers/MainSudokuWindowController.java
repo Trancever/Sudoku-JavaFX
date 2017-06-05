@@ -1,7 +1,7 @@
 package sample.controllers;
 
 import exceptions.SudokuSerializeException;
-import game.Game;
+import sample.helpers.Game;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.adapter.JavaBeanIntegerPropertyBuilder;
 import javafx.event.EventHandler;
@@ -22,7 +22,6 @@ import sample.CustomWidgets.NumberButton;
 import sample.WindowManager;
 import sample.helpers.CustomConverter;
 import sudokupack.Dao;
-import sudokupack.JDBCSudokuBoardDao;
 import sudokupack.SudokuBoard;
 import sudokupack.SudokuBoardDaoFactory;
 import java.io.File;

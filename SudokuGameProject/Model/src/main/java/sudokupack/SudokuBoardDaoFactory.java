@@ -1,5 +1,8 @@
 package sudokupack;
 
+/**
+ * SudokuBoardDaoFactory is a singleton factory of Dao objects
+ */
 public class SudokuBoardDaoFactory {
 
     private static SudokuBoardDaoFactory instance = new SudokuBoardDaoFactory();

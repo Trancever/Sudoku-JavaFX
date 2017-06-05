@@ -8,30 +8,55 @@ import java.lang.reflect.Array;
 import java.util.*;
 import java.io.Serializable;
 
+/**
+ * SudokuBoard is a class that represents Sudoku
+ */
 @Entity
 public class SudokuBoard implements Serializable, Cloneable {
 
+    /**
+     * Variable that represents number of ROWS of Sudoku
+     */
     @Transient
     private static final int ROWS = 9;
 
+    /**
+     * Variable that represents number of COLUMNS of Sudoku
+     */
     @Transient
     private static final int COLUMNS = 9;
 
+    /**
+     * Id needed for database mapping
+     */
     @Id
     private String id;
 
+    /**
+     * List of lists of SudokuFields that represents SudokuGrid
+     */
     @Transient
     private ArrayList<ArrayList<SudokuField>> field;
 
+    /**
+     * Linear list of SudokuFields needed for database mapping.
+     */
     @OneToMany(cascade = CascadeType.PERSIST)
     private List<SudokuField> linearBoard;
 
+    /**
+     * Parameterless constructor.
+     * Initialize all members.
+     */
     public SudokuBoard() {
         field = new ArrayList<ArrayList<SudokuField>>();
         linearBoard = new ArrayList<SudokuField>();
         initBoard();
     }
 
+    /**
+     * Sets 3 random values in 3 random fields to make SudokuBoard being solved randomly.
+     */
     private void initBoard() {
         for (int i = 0; i < ROWS; i++) {
             field.add(new ArrayList<SudokuField>());
@@ -53,11 +78,21 @@ public class SudokuBoard implements Serializable, Cloneable {
         }
     }
 
+    /**
+     * field getter.
+     * @return field
+     */
     public ArrayList<ArrayList<SudokuField>> getAll() {
         ArrayList<ArrayList<SudokuField>> tmp = field;
         return tmp;
     }
 
+    /**
+     * getValue returs SudokuField value
+     * @param row row of the field
+     * @param col column of the field
+     * @return SudokuField value
+     */
     public int getValue(final int row, final int col) {
         if (col < 0 || col > 8 || row < 0 || row > 8) {
             throw new IndexOutOfBoundsException("Wrong parameters of getValue. Given row = " + row
@@ -67,10 +102,23 @@ public class SudokuBoard implements Serializable, Cloneable {
         return value;
     }
 
+    /**
+     * getField returns SudokuField
+     * @param row row of the field
+     * @param col column of the field
+     * @return SudokuField
+     */
     public SudokuField getField(final int row, final int col) {
         return this.field.get(row).get(col);
     }
 
+    /**
+     * setValue sets value in the SudokuField
+     * @param row row of the field
+     * @param col column of the field
+     * @param value given value
+     * @throws IndexOutOfBoundsException when row or column lower than 0 or higher than 8
+     */
     public void setValue(final int row, final int col, final int value) throws IndexOutOfBoundsException {
         if (col < 0 || col > 8 || row < 0 || row > 8) {
             throw new IndexOutOfBoundsException("Wrong parameters of setValue. Given row = " + row
@@ -79,6 +127,12 @@ public class SudokuBoard implements Serializable, Cloneable {
         this.field.get(row).get(col).setValue(value);
     }
 
+    /**
+     * setRow returns SudokuRow
+     * @param row row of the field
+     * @return SudokuRow
+     * @throws IndexOutOfBoundsException when row lower than 0 or higher than 8
+     */
     public SudokuRow getRow(final int row) throws IndexOutOfBoundsException {
         if (row < 0 || row > 8) {
             throw new IndexOutOfBoundsException("Wrong row. Given = " + row + " expected from 0 to 8.");
@@ -93,6 +147,12 @@ public class SudokuBoard implements Serializable, Cloneable {
         return new SudokuRow(tmp);
     }
 
+    /**
+     * getColumn returns SudokuColumn
+     * @param column column of the field
+     * @return SudokuColumn
+     * @throws IndexOutOfBoundsException when column lower than 0 or higher than 8
+     */
     public SudokuColumn getColumn(final int column) throws IndexOutOfBoundsException {
         if (column < 0 || column > 8) {
             throw new IndexOutOfBoundsException("Wrong column. Given = " + column + " expected from 0 to 8.");
@@ -107,6 +167,13 @@ public class SudokuBoard implements Serializable, Cloneable {
         return new SudokuColumn(tmp);
     }
 
+    /**
+     * getBox returns SudokuBox
+     * @param row row of the field
+     * @param column column of the field
+     * @return SudokuBox
+     * @throws IndexOutOfBoundsException when row, column lower than 0 or higher than 8
+     */
     public SudokuBox getBox(final int row, final int column) throws IndexOutOfBoundsException {
         if (column < 0 || column > 8 || row < 0 || row > 8) {
             throw new IndexOutOfBoundsException("Wrong Box. Given row = " + row + " expected from 0 to 8. "
@@ -123,6 +190,10 @@ public class SudokuBoard implements Serializable, Cloneable {
         return new SudokuBox(tmp);
     }
 
+    /**
+     * Sets 0 value in randomly choosen SudokuFields
+     * @param amount amount of fields to be cleared
+     */
     public void cleanRandomlyFields(final int amount) {
         Random random = new Random();
         int tmp = amount;
@@ -137,6 +208,10 @@ public class SudokuBoard implements Serializable, Cloneable {
         }
     }
 
+    /**
+     * isSolved checks if Sudoku has been solved correctly
+     * @return true if solved, false if not
+     */
     public boolean isSolved() {
         boolean solved = true;
         int i = 0;
@@ -156,16 +231,22 @@ public class SudokuBoard implements Serializable, Cloneable {
         return true;
     }
 
+    /**
+     * convert2dto1d converts List of List of SudokuFields to List of SudokuFields and sets it in linearBoard variable
+     */
     public void convert2dto1d() {
-        for(int i = 0; i < ROWS; i ++) {
-            for(int j = 0; j < COLUMNS; j++) {
+        for (int i = 0; i < ROWS; i++) {
+            for (int j = 0; j < COLUMNS; j++) {
                 this.linearBoard.add(this.field.get(i).get(j));
             }
         }
     }
 
+    /**
+     * convert1dto2d converts List of SudokuFields to List of List of SudokuFields and sets it in field variable
+     */
     public void convert1dto2d() {
-        for(int i = 0; i < linearBoard.size(); i ++) {
+        for (int i = 0; i < linearBoard.size(); i++) {
             int x = i % 9;
             int y = i / 9;
             this.setValue(y, x, this.linearBoard.get(i).getValue());
@@ -177,7 +258,7 @@ public class SudokuBoard implements Serializable, Cloneable {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 

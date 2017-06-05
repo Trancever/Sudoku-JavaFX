@@ -1,6 +1,6 @@
 package sample;
 
-import game.Game;
+import sample.helpers.Game;
 import javafx.stage.Stage;
 
 import java.util.Locale;

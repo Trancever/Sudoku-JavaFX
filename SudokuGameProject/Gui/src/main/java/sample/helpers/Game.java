@@ -1,10 +1,8 @@
-package game;
+package sample.helpers;
 
 import sudokupack.BackTrackingSudokuSolver;
 import sudokupack.SudokuBoard;
 import sudokupack.SudokuSolver;
-
-import java.util.List;
 
 public class Game {
 

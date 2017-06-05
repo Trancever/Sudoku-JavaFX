@@ -6,6 +6,9 @@ import exceptions.SudokuSerializeException;
 
 import java.io.*;
 
+/**
+ * FileSudokuBoardDao is an implementation of Dao class. It's dao that read and write Sudoku from/to file.
+ */
 public class FileSudokuBoardDao implements Dao<SudokuBoard> {
 
     private FileOutputStream fileOutputStream;
@@ -13,8 +16,17 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard> {
     private FileInputStream fileInputStream;
     private ObjectInputStream objectInputStream;
 
+    /**
+     * Parameterless constructor
+     */
     public FileSudokuBoardDao() { }
 
+    /**
+     * read Sudoku from given file
+     * @param name name of the file
+     * @return SudokuBoard instance
+     * @throws SudokuDeserializeException is beaing thrown when problem appear during reading SudokuBoard from file.
+     */
     public SudokuBoard read(final String name) throws SudokuDeserializeException {
         try {
             fileInputStream = new FileInputStream(name);
@@ -46,6 +58,12 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard> {
         }
     }
 
+    /**
+     * write SudokuBoard to file
+     * @param obj SudokuBoard instance to be written
+     * @param name name of the file
+     * @throws SudokuSerializeException is being thrown when problem appear during writing SudokuBoard to file
+     */
     public void write(final SudokuBoard obj, final String name) throws SudokuSerializeException {
         try {
             fileOutputStream = new FileOutputStream(name);
@@ -74,6 +92,10 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard> {
         }
     }
 
+    /**
+     * Close opened streams
+     * @throws SudokuDaoException is being thrown when problem appear during closing opened streams
+     */
     @Override
     public void finalize() throws SudokuDaoException {
         if (fileOutputStream != null) {

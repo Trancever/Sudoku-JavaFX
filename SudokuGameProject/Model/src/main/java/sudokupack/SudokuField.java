@@ -6,17 +6,29 @@ import com.google.common.base.Objects;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * Class SudokuField represents one field of the sudoku grid.
+ */
 @Entity
 public class SudokuField implements Serializable, Cloneable, Comparable {
 
+    /**
+     *  Id of SudokuField needed for database mapping
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    /**
+     * Current value of SudokuField
+     */
     @Basic(fetch = FetchType.EAGER)
     @Column(name = "Value")
     private Integer value;
 
+    /**
+     * Flag which represents if field can be changeable.
+     */
     @Basic(fetch = FetchType.EAGER)
     @Column(name = "IsChangeable")
     private Boolean isChangeable;
@@ -25,18 +37,30 @@ public class SudokuField implements Serializable, Cloneable, Comparable {
         return sudokuBoard;
     }
 
-    public void setSudokuBoard(SudokuBoard sudokuBoard) {
+    public void setSudokuBoard(final SudokuBoard sudokuBoard) {
         this.sudokuBoard = sudokuBoard;
     }
 
+    /**
+     * Reference to Sudoku which contains this SudokuField
+     */
     @ManyToOne
     @JoinColumn(name = "board_fk", referencedColumnName = "id")
     private SudokuBoard sudokuBoard;
 
+    /**
+     * Parameterless constructor.
+     * Sets value to 0 and isChangeable to false.
+     */
     public SudokuField() {
         value = new Integer(0);
         isChangeable = new Boolean(false);
     }
+
+    /**
+     * Constructor with 1 int parameter
+     * @param value value of SudokuField
+     */
     public SudokuField(final int value) {
         this.value = value;
         this.isChangeable = new Boolean(false);

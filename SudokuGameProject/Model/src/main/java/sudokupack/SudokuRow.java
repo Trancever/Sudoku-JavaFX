@@ -2,8 +2,15 @@ package sudokupack;
 
 import java.util.ArrayList;
 
+/**
+ * SudokuRow is a class representing single sudoku row
+ */
 public class SudokuRow extends SudokuItem implements Cloneable {
 
+    /**
+     * Constructor of SudokuRow
+     * @param values values is List of SudokuFields which represents row in Sudoku
+     */
     public SudokuRow(final ArrayList<SudokuField> values) {
         super(values);
     }

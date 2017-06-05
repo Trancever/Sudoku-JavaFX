@@ -5,10 +5,18 @@ import com.google.common.base.Objects;
 
 import java.util.Random;
 
+/**
+ * BackTrackingSudokuSolver is an implementation of SudokuSolver interface
+ */
 public class BackTrackingSudokuSolver implements SudokuSolver {
 
     private Random random = new Random();
 
+    /**
+     * solve try to solve SUdokuBoard
+     * @param sudokuBoard SudokuBoard instance which has to be solved
+     * @return true if succeded, false if failed
+     */
     public boolean solve(final SudokuBoard sudokuBoard) {
         int row, col;
 
@@ -40,6 +48,11 @@ public class BackTrackingSudokuSolver implements SudokuSolver {
         return false;
     }
 
+    /**
+     * findUnassignedLocation finds SudokuFields with 0 value
+     * @param sudokuBoard board that contain SudokuFields
+     * @return int array with 3 values, array[0] => field value, array[1] => field row, array[2] => field column
+     */
     private int[] findUnassignedLocation(final SudokuBoard sudokuBoard) {
         int[] tmp = new int[3];
         int row, col = 0;
@@ -59,6 +72,13 @@ public class BackTrackingSudokuSolver implements SudokuSolver {
         return tmp;
     }
 
+    /**
+     * isSafe checks if row, column and box are filled correctly
+     * @param row row of the SudokuBoard
+     * @param col column of the SudokuBoard
+     * @param sudokuBoard SudokuBoard instance
+     * @return true if filled corretly, false otherwise
+     */
     private boolean isSafe(final int row, final int col, final SudokuBoard sudokuBoard) {
         return sudokuBoard.getRow(row).verify() && sudokuBoard.getColumn(col).verify() && sudokuBoard.getBox(row, col).verify();
     }

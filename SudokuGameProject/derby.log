@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Tue May 30 22:14:58 CEST 2017:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.3.0 - (1405108): instance a816c00e-015c-5aff-4791-00000227b818 
+Mon Jun 05 07:09:45 CEST 2017:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.3.0 - (1405108): instance a816c00e-015c-76a8-adc6-00000974bc60 
 on database directory D:\Kompo\an_pn_12_04\SudokuGameProject\SudokuDatabase  with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
 Loaded from file:/C:/Users/Trensik/.m2/repository/org/apache/derby/derby/10.8.3.0/derby-10.8.3.0.jar
 java.vendor=Oracle Corporation

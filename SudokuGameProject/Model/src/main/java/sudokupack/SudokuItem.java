@@ -7,14 +7,28 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+/**
+ * SudokuItem is an abstract class that represents items which sudoku contains
+ */
 public abstract class SudokuItem {
 
+    /**
+     * values which represents row in sudoku
+     */
     protected ArrayList<SudokuField> values;
 
+    /**
+     * Constructor of SudokuItem
+     * @param values values is List of SudokuFields which represents row in Sudoku
+     */
     public SudokuItem(final ArrayList<SudokuField> values) {
         this.values = values;
     }
 
+    /**
+     * verify is a method that checks if values contains only unique values
+     * @return true if contains unique values, false if contains duplicated values (excluding zeroes)
+     */
     public boolean verify() {
         HashSet<Integer> set = new HashSet<Integer>();
         for (int i = 0; i < values.size(); i++) {
@@ -27,6 +41,10 @@ public abstract class SudokuItem {
         return true;
     }
 
+    /**
+     * isSolved is a method that checks if values contains only unique values
+     * @return true if contains unique values, false if contains duplicated values (including zeroes)
+     */
     public boolean isSolved() {
         HashSet<Integer> set = new HashSet<Integer>();
         for (int i = 0; i < values.size(); i++) {

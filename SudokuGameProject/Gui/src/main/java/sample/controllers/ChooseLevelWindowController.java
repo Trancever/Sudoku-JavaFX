@@ -1,8 +1,8 @@
 package sample.controllers;
 
 import exceptions.SudokuDeserializeException;
-import game.Game;
-import game.GameLevel;
+import sample.helpers.Game;
+import sample.helpers.GameLevel;
 import javafx.fxml.FXML;
 
 import javafx.fxml.FXMLLoader;

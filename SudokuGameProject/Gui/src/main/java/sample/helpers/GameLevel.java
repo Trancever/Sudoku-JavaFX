@@ -1,4 +1,4 @@
-package game;
+package sample.helpers;
 
 public enum GameLevel {
 
