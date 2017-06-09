@@ -1,11 +1,11 @@
 ----------------------------------------------------------------
-Mon Jun 05 07:09:45 CEST 2017:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.3.0 - (1405108): instance a816c00e-015c-76a8-adc6-00000974bc60 
-on database directory D:\Kompo\an_pn_12_04\SudokuGameProject\SudokuDatabase  with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
-Loaded from file:/C:/Users/Trensik/.m2/repository/org/apache/derby/derby/10.8.3.0/derby-10.8.3.0.jar
+Fri Jun 09 22:54:27 CEST 2017:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.3.0 - (1405108): instance a816c00e-015c-8ea3-0593-00000d3f34b8 
+on database directory D:\Studia\Programowanie Komponentowe\repo\an_pn_12_04\SudokuGameProject\SudokuDatabase  with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
+Loaded from file:/C:/Users/Igor/.m2/repository/org/apache/derby/derby/10.8.3.0/derby-10.8.3.0.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_121-b13
-user.dir=D:\Kompo\an_pn_12_04\SudokuGameProject
+user.dir=D:\Studia\Programowanie Komponentowe\repo\an_pn_12_04\SudokuGameProject
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0
