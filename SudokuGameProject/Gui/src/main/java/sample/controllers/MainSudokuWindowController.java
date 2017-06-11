@@ -27,13 +27,21 @@ import sudokupack.SudokuBoardDaoFactory;
 import java.io.File;
 import java.util.Optional;
 
-
+/**
+ * MainSudokuWindowController is a controller class for MainSudokuWindow View.
+ */
 public class MainSudokuWindowController {
 
     static final Logger logger = LoggerFactory.getLogger(MainSudokuWindowController.class);
 
+    /**
+     * current game instance
+     */
     private Game game;
 
+    /**
+     * reference to current selected field on sudoku
+     */
     private FieldPane currentSelectedField;
 
     @FXML
@@ -51,6 +59,9 @@ public class MainSudokuWindowController {
     @FXML
     private Button newGameButton;
 
+    /**
+     * initialize method create and initialize ui controls.
+     */
     @FXML
     public void initialize() {
         this.currentSelectedField = null;
@@ -68,6 +79,9 @@ public class MainSudokuWindowController {
         logger.debug("MainSudokuWindowController initialized.");
     }
 
+    /**
+     * initializeButtons create and add to grid buttons with sudoku numbers.
+     */
     private void initializeButtons() {
         for (int x = 0; x < 10; x++) {
             NumberButton button = new NumberButton(x);
@@ -80,6 +94,10 @@ public class MainSudokuWindowController {
         }
     }
 
+    /**
+     * addButtonEvent adds event to button on click
+     * @param button instance of button to which we add event
+     */
     private void addButtonEvent(final NumberButton button) {
         button.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(final MouseEvent event) {
@@ -103,6 +121,10 @@ public class MainSudokuWindowController {
         });
     }
 
+    /**
+     * initializeSudokuGrid create SudokuBoard grid and add fields to it
+     * @throws BindingFailedException occurs after encountering problems with binding ui to model
+     */
     private void initializeSudokuGrid() throws BindingFailedException {
         for (int x = 0; x < 3; x++) {
             for (int y = 0; y < 3; y++) {
@@ -131,11 +153,21 @@ public class MainSudokuWindowController {
         }
     }
 
+    /**
+     * createFieldPane creates new instance of FieldPane
+     * @param x desired field row position
+     * @param y desired field column position
+     * @return new instance of FieldPane
+     */
     private FieldPane createFieldPane(final int x, final int y) {
         return new FieldPane(x, y, Integer.toString(this.game.getSudokuBoard().getValue(x, y)),
                                                         this.game.getSudokuBoard().getField(x, y).getChangeable());
     }
 
+    /**
+     * addSudokuFieldEvent adds event to FieldPane on click
+     * @param pane instance of FieldPane to which we add event
+     */
     private void addSudokuFieldEvent(final FieldPane pane) {
         pane.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(final MouseEvent event) {
@@ -162,6 +194,9 @@ public class MainSudokuWindowController {
         });
     }
 
+    /**
+     * onResetGameButtonClicked reset Sudoku to starting state
+     */
     @FXML
     public void onResetGameButtonClicked() {
         for (Node node : sudokuGrid.getChildren()) {
@@ -175,6 +210,9 @@ public class MainSudokuWindowController {
         }
     }
 
+    /**
+     * onNewGameButtonClicked close MainSudokuWindow and shows ChooseLevelWindow
+     */
     @FXML
     public void onNewGameButtonClicked() {
         Stage stage = (Stage) this.sudokuGrid.getScene().getWindow();
@@ -182,6 +220,9 @@ public class MainSudokuWindowController {
         WindowManager.getInstance().getPrimaryStage().show();
     }
 
+    /**
+     * onSaveFileStateButtonClicked save game to file
+     */
     @FXML
     public void onSaveFileStateButtonClicked() {
         try {
@@ -203,6 +244,9 @@ public class MainSudokuWindowController {
         }
     }
 
+    /**
+     * onSaveDBStateButtonClicked save game to database
+     */
     @FXML
     public void onSaveDBStateButtonClicked() {
         try {
@@ -222,6 +266,9 @@ public class MainSudokuWindowController {
         }
     }
 
+    /**
+     * notifyAboutSuccessfullSerialization displays alert window with message
+     */
     private void notifyAboutSuccessfullSerialization() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Game saved");
@@ -230,6 +277,9 @@ public class MainSudokuWindowController {
         alert.showAndWait();
     }
 
+    /**
+     * notifyAboutNotSucessfullSerialization displays alert window with message
+     */
     private void notifyAboutNotSucessfullSerialization() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");

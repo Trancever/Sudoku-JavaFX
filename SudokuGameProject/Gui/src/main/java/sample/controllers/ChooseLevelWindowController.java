@@ -14,7 +14,6 @@ import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sample.CustomExceptions.FXMLOpenFailedException;
-import sample.CustomExceptions.SaveGameReadException;
 import sample.MainSudokuWindow;
 import sample.WindowManager;
 import sudokupack.Dao;
@@ -25,18 +24,15 @@ import sudokupack.SudokuBoardDaoFactory;
 import java.io.*;
 import java.util.*;
 
+/**
+ * ChooseLevelWindowController is a controller class for ChooseLevelWindow View.
+ */
 public class ChooseLevelWindowController {
 
     Logger logger = LoggerFactory.getLogger(ChooseLevelWindowController.class);
 
     @FXML
     private Button easyButton;
-
-    @FXML
-    private Button mediumButton;
-
-    @FXML
-    private Button hardButton;
 
     @FXML
     private Button exitButton;
@@ -47,27 +43,33 @@ public class ChooseLevelWindowController {
     @FXML
     private RadioButton usRadioButton;
 
-    @FXML
-    private MenuItem loadItem;
-
-    @FXML
-    private MenuItem closeItem;
-
+    /**
+     * onEasyButtonClick method is being invoked on easyButton click. It runs game in easy mode.
+     */
     @FXML
     public void onEasyButtonClick() {
         this.runGame(GameLevel.EASY, new SudokuBoard(), false);
     }
 
+    /**
+     * onMediumButtonClick method is being invoked on easyButton click. It runs game in medium mode.
+     */
     @FXML
     public void onMediumButtonClick() {
         this.runGame(GameLevel.MEDIUM, new SudokuBoard(), false);
     }
 
+    /**
+     * onHardButtonClick method is being invoked on easyButton click. It runs game in hard mode.
+     */
     @FXML
     public void onHardButtonClick() {
         this.runGame(GameLevel.HARD, new SudokuBoard(), false);
     }
 
+    /**
+     * initialize method creates and initialize ui controls.
+     */
     @FXML
     public void initialize() {
         if (easyButton.getText().equals("Easy")) {
@@ -78,6 +80,12 @@ public class ChooseLevelWindowController {
         logger.debug("ChooseLevelWindowController initialized");
     }
 
+    /**
+     * runGame create new game, create new MainSudokuWindow
+     * @param level level of game (easy, medium, hard)
+     * @param sudokuBoard Sudoku model instance
+     * @param isLoaded flag that shows if Sudoku is loaded or created new one
+     */
     private void runGame(final GameLevel level, final SudokuBoard sudokuBoard, final boolean isLoaded) {
         MainSudokuWindow window = new MainSudokuWindow();
         try {
@@ -92,11 +100,18 @@ public class ChooseLevelWindowController {
         stage.hide();
     }
 
+    /**
+     * onExitButtonClick method is being invoked on exitButton click. It close application.
+     */
     @FXML
     public void onExitButtonClick() {
         this.closeApp();
     }
 
+    /**
+     * onRadioToggleGroupToggled is being invoked after changing language on ui. It's changing application locale and refresh UI.
+     * @throws FXMLOpenFailedException throws it when exception occures while loading fxml file.
+     */
     @FXML
     public void onRadioToggleGroupToggled() throws FXMLOpenFailedException {
 
@@ -118,18 +133,27 @@ public class ChooseLevelWindowController {
         WindowManager.getInstance().setCurrentLocale(locale);
     }
 
+    /**
+     * onCloseButtonClicked method is being invoked on closeButton (in toolbar) click. It close application.
+     */
     @FXML
     public void onCloseButtonClicked() {
         this.closeApp();
     }
 
+    /**
+     * closeApp closes application.
+     */
     private void closeApp() {
         Stage stage = (Stage) exitButton.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * onLoadFileGameButtonClicked loads saved game from file
+     */
     @FXML
-    public void onLoadFileGameButtonClicked() throws SaveGameReadException {
+    public void onLoadFileGameButtonClicked() {
         try {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Select file with saved game.");
@@ -148,6 +172,9 @@ public class ChooseLevelWindowController {
         }
     }
 
+    /**
+     * notifyAboutNotSuccessfullDeserialization shows alert window with message
+     */
     private void notifyAboutNotSuccessfullDeserialization() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error while loading game.");
@@ -156,6 +183,9 @@ public class ChooseLevelWindowController {
         alert.showAndWait();
     }
 
+    /**
+     * onLoadDBGameButtonClicked loads saved game from database.
+     */
     @FXML
     public void onLoadDBGameButtonClicked() {
         try {
