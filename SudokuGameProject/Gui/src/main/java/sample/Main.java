@@ -17,6 +17,9 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * It's main class of application. Starts first window.
+ */
 public class Main extends Application {
 
     Logger logger = LoggerFactory.getLogger(Main.class);
@@ -33,6 +36,11 @@ public class Main extends Application {
 
     }
 
+    /**
+     * start method loads fxml file, create scene and set it on stage
+     * @param primaryStage primary stage of application
+     * @throws FXMLOpenFailedException when problem occurs while loading fxml file.
+     */
     @Override
     public void start(final Stage primaryStage) throws FXMLOpenFailedException {
         Locale locale = new Locale("pl", "PL");
@@ -54,6 +62,10 @@ public class Main extends Application {
     }
 
 
+    /**
+     * Main method, launch javaFX application
+     * @param args
+     */
     public static void main(final String[] args) {
         LauncherImpl.launchApplication(Main.class, SplashScreenLoader.class, args);
     }

@@ -19,7 +19,7 @@ public enum GameLevel {
     }
 
     /**
-     * getNumberOfFieldsToDelete 
+     * getNumberOfFieldsToDelete
      * @return number of fields that have to be deleted on this level
      */
     public int getNumberOfFieldsToDelete() {

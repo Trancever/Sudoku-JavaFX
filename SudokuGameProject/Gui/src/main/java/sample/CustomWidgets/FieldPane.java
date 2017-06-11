@@ -20,7 +20,7 @@ public class FieldPane extends Pane {
     private int y;
 
     /**
-     * label taht is displayed on the Pane
+     * label that is displayed on the Pane
      */
     private Label label;
 

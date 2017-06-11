@@ -12,6 +12,9 @@ import sample.CustomExceptions.FXMLOpenFailedException;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
+/**
+ * This class is second window's class.
+ */
 public class MainSudokuWindow {
 
     Logger logger = LoggerFactory.getLogger(MainSudokuWindow.class);
@@ -19,6 +22,10 @@ public class MainSudokuWindow {
     private Stage stage;
     private Scene scene;
 
+    /**
+     * start method loads fxml file, create scene and set it on stage
+     * @throws FXMLOpenFailedException when problem occurs while loading fxml file.
+     */
     public void start() throws FXMLOpenFailedException {
         ResourceBundle bundle = ResourceBundle.getBundle("MyBundle",
                 WindowManager.getInstance().getCurrentLocale());

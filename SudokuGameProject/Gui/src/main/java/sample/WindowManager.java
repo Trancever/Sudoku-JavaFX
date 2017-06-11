@@ -5,26 +5,25 @@ import javafx.stage.Stage;
 
 import java.util.Locale;
 
+/**
+ * WindowManager is a singeleton class which holds windows settings and app settings
+ */
 public class WindowManager {
 
+    /**
+     * current stage
+     */
     private Stage primaryStage;
 
+    /**
+     * current app locale
+     */
     private Locale currentLocale;
 
+    /**
+     * current Game
+     */
     private Game game;
-
-    private boolean isLoaded;
-
-    public boolean isLoaded() {
-        return isLoaded;
-    }
-
-    public void setLoaded(final boolean loaded) {
-        isLoaded = loaded;
-    }
-
-    public static final String SAVE_FILE_PATH = "saved.xD";
-    public static final String SAVE_HELPER_FILE_PATH = "fields.xD";
 
     public Game getGame() {
         return game;
