@@ -4,11 +4,29 @@ import sudokupack.BackTrackingSudokuSolver;
 import sudokupack.SudokuBoard;
 import sudokupack.SudokuSolver;
 
+/**
+ * Game represents single Game in Sudoku Game
+ */
 public class Game {
 
+    /**
+     * gameLevel is level of the game (easy, medium, hard)
+     */
     private GameLevel gameLevel;
+
+    /**
+     * sudokuBoard is an instance of our Sudoku model
+     */
     private SudokuBoard sudokuBoard;
+
+    /**
+     * sudokuSolver is used to solve Sudoku when the game starts
+     */
     private SudokuSolver sudokuSolver;
+
+    /**
+     * isLoaded is a flag that holds info if game is loaded or created new one
+     */
     private boolean isLoaded;
 
     public boolean isLoaded() {
@@ -29,6 +47,9 @@ public class Game {
         return this.sudokuBoard;
     }
 
+    /**
+     * cleanFields cleans random fields in SudokuBoard model
+     */
     public void cleanFields() {
         sudokuBoard.cleanRandomlyFields(gameLevel.getNumberOfFieldsToDelete());
     }

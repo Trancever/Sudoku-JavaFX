@@ -4,12 +4,29 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 
-
+/**
+ * FieldPane represents field in Sudoku
+ */
 public class FieldPane extends Pane {
 
+    /**
+     * x is row position
+     */
     private int x;
+
+    /**
+     * y is column position
+     */
     private int y;
+
+    /**
+     * label taht is displayed on the Pane
+     */
     private Label label;
+
+    /**
+     * flag that holds information if field is changeable
+     */
     private boolean isChangeable;
 
     public Label getLabel() {
@@ -43,6 +60,10 @@ public class FieldPane extends Pane {
 
     }
 
+    /**
+     * set given text on Pane's Label
+     * @param text text that will be set in Pane
+     */
     public void setLabelText(final String text) {
         String content = text;
         if (content.equals("0")) {
@@ -51,6 +72,9 @@ public class FieldPane extends Pane {
         this.label.setText(content);
     }
 
+    /**
+     * setStyle changes FieldPane styles, depends on isChangeable flag
+     */
     private void setStyle() {
         this.getStyleClass().add("sudokuField");
         this.setStyle("-fx-pref-width: 10em; -fx-pref-height: 10em;");

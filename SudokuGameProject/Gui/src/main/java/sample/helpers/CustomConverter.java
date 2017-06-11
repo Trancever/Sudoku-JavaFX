@@ -3,10 +3,15 @@ package sample.helpers;
 import javafx.util.StringConverter;
 
 /**
- * Created by Trensik on 5/21/2017.
+ * CustomConverter converts String to Number and viceVersa
  */
 public class CustomConverter extends StringConverter<Number> {
 
+    /**
+     * converts Number to String
+     * @param object Number object that has to be converted
+     * @return String converted from Number
+     */
     @Override
     public String toString(final Number object) {
         if (object.intValue() == 0) {
@@ -16,6 +21,11 @@ public class CustomConverter extends StringConverter<Number> {
         }
     }
 
+    /**
+     * converts String to Number
+     * @param string String object that has to be converted
+     * @return Number converted from String
+     */
     @Override
     public Number fromString(final String string) {
         if (string.equals("")) {

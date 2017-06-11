@@ -5,7 +5,7 @@ import sample.WindowManager;
 import java.util.ResourceBundle;
 
 /**
- * Created by Igor on 25.05.2017.
+ * BindingFailedException 
  */
 public class BindingFailedException extends NoSuchMethodException {
 

@@ -6,8 +6,14 @@ import sample.WindowManager;
 
 import java.util.ResourceBundle;
 
+/**
+ * NumberButton represents button in Sudoku
+ */
 public class NumberButton extends Button {
 
+    /**
+     * button's number
+     */
     public int number;
 
     public int getNumber() {
